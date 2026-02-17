@@ -1,0 +1,75 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "slingshot-backend"
+version = "0.1.0"
+description = "Agentic Research System for Indian Stock Market"
+requires-python = ">=3.11"
+dependencies = [
+    # API Framework
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+
+    # Database
+    "sqlalchemy[asyncio]>=2.0.0",
+    "asyncpg>=0.29.0",
+    "alembic>=1.13.0",
+
+    # Web Scraping
+    "httpx>=0.25.0",
+    "beautifulsoup4>=4.12.0",
+
+    # Caching
+    "redis>=5.0.0",
+
+    # Utilities
+    "pydantic>=2.5.0",
+    "pydantic-settings>=2.1.0",
+    "python-dotenv>=1.0.0",
+    "structlog>=23.2.0",
+    "python-multipart>=0.0.7",
+]
+
+[project.optional-dependencies]
+llm = [
+    # LLM & Agent Framework
+    "langgraph>=0.2.0",
+    "langchain>=0.3.0",
+    "langchain-anthropic>=0.2.0",
+    "langchain-openai>=0.2.0",
+]
+rag = [
+    # Vector DB & Embeddings
+    "chromadb>=0.4.0",
+    "sentence-transformers>=2.2.0",
+]
+scraping = [
+    # PDF Parsing
+    "pymupdf>=1.23.0",
+    "pdfplumber>=0.10.0",
+    # Browser automation
+    "playwright>=1.40.0",
+]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.23.0",
+    "ruff>=0.1.0",
+]
+npu = [
+    "onnxruntime>=1.16.0",
+]
+all = [
+    "slingshot-backend[llm,rag,scraping]",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W"]
