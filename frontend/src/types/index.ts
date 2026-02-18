@@ -169,6 +169,34 @@ export interface Portfolio {
 
 export interface StressTestResult {
   scenario_name: string;
+  description: string;
+  impact_percentage: number;
+  severity: "low" | "moderate" | "high" | "severe";
   parameters: Record<string, unknown>;
   results: Record<string, unknown>;
+}
+
+export interface PortfolioMetrics {
+  total_value: number;
+  total_invested: number;
+  total_return_pct: number;
+  risk_score: number;
+  portfolio_beta: number;
+}
+
+export interface SectorAllocation {
+  sector: string;
+  weight: number;
+  value: number;
+}
+
+export interface PortfolioAnalysisResponse {
+  portfolio: Portfolio;
+  metrics: PortfolioMetrics;
+  sector_allocation: SectorAllocation[];
+  stress_tests: StressTestResult[];
+  recommendations: string[];
+  citations: Citation[];
+  executive_summary: string;
+  full_report: string;
 }
