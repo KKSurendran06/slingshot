@@ -13,7 +13,6 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import type { ThoughtStep, ResearchStatus } from "@/types";
 
@@ -100,7 +99,7 @@ export default function ThoughtLog({ thoughts, status }: ThoughtLogProps) {
       </div>
 
       {/* Thought steps */}
-      <ScrollArea className="flex-1 p-4" viewportRef={scrollRef}>
+      <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto p-4">
         {thoughts.length === 0 && !status && (
           <div className="flex flex-col items-center justify-center py-12 text-center text-muted-foreground">
             <BrainCircuit className="mb-3 h-10 w-10 opacity-30" />
@@ -184,7 +183,7 @@ export default function ThoughtLog({ thoughts, status }: ThoughtLogProps) {
             );
           })}
         </AnimatePresence>
-      </ScrollArea>
+      </div>
     </div>
   );
 }

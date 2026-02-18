@@ -200,3 +200,18 @@ export interface PortfolioAnalysisResponse {
   executive_summary: string;
   full_report: string;
 }
+
+// ==========================================================================
+// Chat types (Agent Chat in Deep Research mode)
+// ==========================================================================
+
+export interface ChatMessage {
+  id: string;
+  role: "user" | "agent";
+  content: string;
+  timestamp: number;
+  /** Optional thinking steps the agent "shows" while generating */
+  thinkingSteps?: string[];
+  /** Whether the agent is still streaming / typing */
+  isStreaming?: boolean;
+}

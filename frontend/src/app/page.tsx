@@ -4,8 +4,10 @@ import { useCallback, useState } from "react";
 import SearchBar from "@/components/research/SearchBar";
 import ThoughtLog from "@/components/research/ThoughtLog";
 import ResearchReport from "@/components/research/ResearchReport";
+import AgentChat from "@/components/research/AgentChat";
 import { useResearchStore } from "@/stores/research";
 import { useThoughtsStore } from "@/stores/thoughts";
+import { useChatStore } from "@/stores/chat";
 import { startResearch } from "@/lib/api";
 import { createResearchSocket } from "@/lib/socket";
 import type { ThoughtStep, Citation } from "@/types";
@@ -124,6 +126,7 @@ Key Risks:
 export default function HomePage() {
   const research = useResearchStore();
   const thoughts = useThoughtsStore();
+  const chatStore = useChatStore();
   const [showDemo, setShowDemo] = useState(false);
 
   const handleSearch = useCallback(
@@ -131,6 +134,7 @@ export default function HomePage() {
       research.setLoading(true);
       research.reset();
       thoughts.clearThoughts();
+      chatStore.clearChat();
 
       try {
         const res = await startResearch({ query });
@@ -147,7 +151,7 @@ export default function HomePage() {
 
       research.setLoading(false);
     },
-    [research, thoughts]
+    [research, thoughts, chatStore]
   );
 
   const handleDemoSearch = useCallback(
@@ -155,6 +159,7 @@ export default function HomePage() {
       research.setLoading(true);
       research.reset();
       thoughts.clearThoughts();
+      chatStore.clearChat();
       setShowDemo(false);
 
       // Simulate progressive thought steps
@@ -193,7 +198,7 @@ export default function HomePage() {
         }
       }, 800);
     },
-    [research, thoughts]
+    [research, thoughts, chatStore]
   );
 
   const displayThoughts = showDemo ? demoThoughts : thoughts.thoughts;
@@ -201,11 +206,13 @@ export default function HomePage() {
     ? research.status
     : thoughts.currentStatus ?? research.status;
 
+  const isResearchComplete = displayStatus === "complete";
+
   return (
     <div className="flex flex-col h-full">
       {/* Search bar */}
       <div className="border-b bg-background px-6 py-4">
-        <div className="mx-auto max-w-4xl">
+        <div className="mx-auto max-w-5xl">
           <SearchBar
             onSearch={handleDemoSearch}
             isLoading={research.isLoading}
@@ -213,20 +220,52 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Content area: Thought Log + Report */}
-      <div className="flex-1 overflow-hidden grid grid-cols-1 lg:grid-cols-5 gap-0">
+      {/* Content area: Thought Log + Report + Agent Chat */}
+      <div className="flex-1 overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-0">
         {/* Thought Log - left panel */}
-        <div className="lg:col-span-2 border-r overflow-hidden p-4">
+        <div className="lg:col-span-3 border-r overflow-hidden p-4">
           <ThoughtLog thoughts={displayThoughts} status={displayStatus} />
         </div>
 
-        {/* Research Report - right panel */}
-        <div className="lg:col-span-3 overflow-auto p-6">
+        {/* Research Report - center panel */}
+        <div className="lg:col-span-5 overflow-auto p-6 border-r">
           <ResearchReport
             executiveSummary={research.executiveSummary}
             fullReport={research.fullReport}
             citations={research.citations}
           />
+        </div>
+
+        {/* Agent Chat - right panel */}
+        <div className="lg:col-span-4 overflow-hidden p-4">
+          {isResearchComplete ? (
+            <AgentChat />
+          ) : (
+            <div className="flex flex-col h-full border rounded-lg bg-card items-center justify-center text-center text-muted-foreground p-6">
+              <div className="rounded-full bg-muted p-3 mb-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="h-6 w-6 opacity-40"
+                >
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                </svg>
+              </div>
+              <p className="text-sm font-medium mb-1">Agent Chat</p>
+              <p className="text-xs max-w-[220px]">
+                {research.isLoading
+                  ? "Chat will be available once the research analysis is complete..."
+                  : "Run a research query first, then ask the agent follow-up questions here."}
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>

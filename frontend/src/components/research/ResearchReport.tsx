@@ -13,7 +13,27 @@ interface ResearchReportProps {
 }
 
 /**
- * Renders a research report with executive summary visible
+ * Split the executive summary into bullet points.
+ * Each sentence (delimited by `. ` or `.\n` or end-of-string after a period)
+ * becomes a separate bullet, preserving [cite-N] markers.
+ */
+function splitIntoBullets(text: string): string[] {
+  // Split on period followed by whitespace (but keep the period with the preceding text).
+  // We look for ". " or ".\n" boundaries while avoiding splitting on decimals like "19.2x".
+  const bullets: string[] = [];
+  // Use a regex that splits after a period+space where the period is NOT preceded by a digit
+  // and NOT followed by a digit (to preserve "19.2x" style numbers).
+  // Simpler approach: split on `. ` that is followed by an uppercase letter or `[`.
+  const parts = text.split(/(?<=\.)\s+(?=[A-Z\[])/g);
+  for (const part of parts) {
+    const trimmed = part.trim();
+    if (trimmed) bullets.push(trimmed);
+  }
+  return bullets.length > 0 ? bullets : [text];
+}
+
+/**
+ * Renders a research report with executive summary as bullet points
  * and detailed analysis + sources in a collapsible section.
  */
 export default function ResearchReport({
@@ -32,9 +52,11 @@ export default function ResearchReport({
     );
   }
 
+  const bullets = executiveSummary ? splitIntoBullets(executiveSummary) : [];
+
   return (
     <div className="space-y-6">
-      {/* Executive Summary — always visible */}
+      {/* Executive Summary — always visible, rendered as bullet points */}
       {executiveSummary && (
         <Card>
           <CardHeader className="pb-3">
@@ -44,9 +66,16 @@ export default function ResearchReport({
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="prose prose-sm max-w-none dark:prose-invert">
-              <ReportContent text={executiveSummary} citations={citations} />
-            </div>
+            <ul className="space-y-2">
+              {bullets.map((bullet, i) => (
+                <li key={i} className="flex gap-2 text-sm leading-relaxed">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                  <span className="prose prose-sm max-w-none dark:prose-invert">
+                    <ReportContent text={bullet} citations={citations} />
+                  </span>
+                </li>
+              ))}
+            </ul>
           </CardContent>
         </Card>
       )}
