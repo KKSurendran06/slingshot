@@ -11,10 +11,10 @@ interface StressTestResultsProps {
 }
 
 const severityConfig = {
-  low: { barColor: "bg-green-500", textColor: "text-green-600" },
-  moderate: { barColor: "bg-amber-500", textColor: "text-amber-600" },
-  high: { barColor: "bg-orange-500", textColor: "text-orange-600" },
-  severe: { barColor: "bg-red-500", textColor: "text-red-600" },
+  low: { barColor: "bg-green-500", textColor: "text-green-400" },
+  moderate: { barColor: "bg-amber-500", textColor: "text-amber-400" },
+  high: { barColor: "bg-orange-500", textColor: "text-orange-400" },
+  severe: { barColor: "bg-red-500", textColor: "text-red-400" },
 };
 
 /**
@@ -66,7 +66,7 @@ export default function StressTestResults({
                   <span
                     className={cn(
                       "text-sm font-bold font-mono",
-                      isPositive ? "text-green-600" : config.textColor
+                      isPositive ? "text-green-400" : config.textColor
                     )}
                   >
                     {isPositive ? "+" : ""}
@@ -75,7 +75,7 @@ export default function StressTestResults({
                 </div>
 
                 {/* Animated bar */}
-                <div className="h-2 rounded-full bg-muted overflow-hidden">
+                <div className="h-2 rounded-full bg-white/[0.06] overflow-hidden">
                   <motion.div
                     className={cn(
                       "h-full rounded-full",

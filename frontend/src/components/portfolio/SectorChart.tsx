@@ -64,7 +64,7 @@ export default function SectorChart({ allocation }: SectorChartProps) {
                 ))}
               </Pie>
               <Tooltip
-                formatter={(value: number) => `${value.toFixed(1)}%`}
+                formatter={(value: number | undefined) => value != null ? `${value.toFixed(1)}%` : ""}
                 contentStyle={{
                   fontSize: "12px",
                   borderRadius: "8px",

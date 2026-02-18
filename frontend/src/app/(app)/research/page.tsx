@@ -211,7 +211,7 @@ export default function HomePage() {
   return (
     <div className="flex flex-col h-full">
       {/* Search bar */}
-      <div className="border-b bg-background px-6 py-4">
+      <div className="border-b border-white/[0.06] px-6 py-4">
         <div className="mx-auto max-w-5xl">
           <SearchBar
             onSearch={handleDemoSearch}
@@ -223,12 +223,12 @@ export default function HomePage() {
       {/* Content area: Thought Log + Report + Agent Chat */}
       <div className="flex-1 overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-0">
         {/* Thought Log - left panel */}
-        <div className="lg:col-span-3 border-r overflow-hidden p-4">
+        <div className="lg:col-span-3 border-r border-white/[0.06] overflow-hidden p-4">
           <ThoughtLog thoughts={displayThoughts} status={displayStatus} />
         </div>
 
         {/* Research Report - center panel */}
-        <div className="lg:col-span-5 overflow-auto p-6 border-r">
+        <div className="lg:col-span-5 overflow-auto p-6 border-r border-white/[0.06]">
           <ResearchReport
             executiveSummary={research.executiveSummary}
             fullReport={research.fullReport}
@@ -241,8 +241,8 @@ export default function HomePage() {
           {isResearchComplete ? (
             <AgentChat />
           ) : (
-            <div className="flex flex-col h-full border rounded-lg bg-card items-center justify-center text-center text-muted-foreground p-6">
-              <div className="rounded-full bg-muted p-3 mb-3">
+            <div className="flex flex-col h-full border border-white/[0.06] rounded-2xl bg-white/[0.03] backdrop-blur-sm items-center justify-center text-center text-muted-foreground p-6">
+              <div className="rounded-full bg-white/[0.06] p-3 mb-3">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"

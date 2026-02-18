@@ -27,23 +27,23 @@ const stepTypeConfig: Record<
 > = {
   planning: {
     icon: BrainCircuit,
-    color: "text-purple-500",
+    color: "text-purple-400",
     label: "Planning",
   },
-  researching: { icon: Search, color: "text-blue-500", label: "Researching" },
+  researching: { icon: Search, color: "text-blue-400", label: "Researching" },
   analyzing: {
     icon: BarChart3,
-    color: "text-amber-500",
+    color: "text-amber-400",
     label: "Analyzing",
   },
   reflecting: {
     icon: MessageSquare,
-    color: "text-teal-500",
+    color: "text-teal-400",
     label: "Reflecting",
   },
   reporting: {
     icon: FileText,
-    color: "text-green-500",
+    color: "text-green-400",
     label: "Reporting",
   },
 };
@@ -52,13 +52,13 @@ const statusConfig: Record<
   string,
   { icon: React.ElementType; color: string; label: string }
 > = {
-  planning: { icon: BrainCircuit, color: "bg-purple-100 text-purple-700", label: "Planning" },
-  researching: { icon: Search, color: "bg-blue-100 text-blue-700", label: "Researching" },
-  analyzing: { icon: BarChart3, color: "bg-amber-100 text-amber-700", label: "Analyzing" },
-  reflecting: { icon: MessageSquare, color: "bg-teal-100 text-teal-700", label: "Reflecting" },
-  reporting: { icon: FileText, color: "bg-green-100 text-green-700", label: "Reporting" },
-  complete: { icon: CheckCircle2, color: "bg-green-100 text-green-700", label: "Complete" },
-  error: { icon: AlertCircle, color: "bg-red-100 text-red-700", label: "Error" },
+  planning: { icon: BrainCircuit, color: "bg-purple-500/15 text-purple-400", label: "Planning" },
+  researching: { icon: Search, color: "bg-blue-500/15 text-blue-400", label: "Researching" },
+  analyzing: { icon: BarChart3, color: "bg-amber-500/15 text-amber-400", label: "Analyzing" },
+  reflecting: { icon: MessageSquare, color: "bg-teal-500/15 text-teal-400", label: "Reflecting" },
+  reporting: { icon: FileText, color: "bg-green-500/15 text-green-400", label: "Reporting" },
+  complete: { icon: CheckCircle2, color: "bg-green-500/15 text-green-400", label: "Complete" },
+  error: { icon: AlertCircle, color: "bg-red-500/15 text-red-400", label: "Error" },
 };
 
 export default function ThoughtLog({ thoughts, status }: ThoughtLogProps) {
@@ -74,9 +74,9 @@ export default function ThoughtLog({ thoughts, status }: ThoughtLogProps) {
   const currentStatus = status ? statusConfig[status] : null;
 
   return (
-    <div className="flex flex-col h-full border rounded-lg bg-card">
+    <div className="flex flex-col h-full border border-white/[0.06] rounded-2xl bg-white/[0.03] backdrop-blur-sm">
       {/* Header */}
-      <div className="flex items-center justify-between border-b px-4 py-3">
+      <div className="flex items-center justify-between border-b border-white/[0.06] px-4 py-3">
         <div className="flex items-center gap-2">
           <BrainCircuit className="h-4 w-4 text-primary" />
           <span className="text-sm font-semibold">Reasoning Trace</span>

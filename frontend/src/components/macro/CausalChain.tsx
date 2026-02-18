@@ -52,7 +52,7 @@ export default function CausalChain({ links }: CausalChainProps) {
                 transition={{ delay: i * 0.4, duration: 0.4 }}
               >
                 <div className="flex flex-col items-center">
-                  <div className="rounded-lg border-2 border-primary/20 bg-primary/5 px-3 py-2 text-center min-w-[120px] max-w-[160px]">
+                  <div className="rounded-lg border-2 border-primary/20 bg-primary/10 px-3 py-2 text-center min-w-[120px] max-w-[160px]">
                     <span className="text-xs font-medium leading-tight">
                       {node}
                     </span>

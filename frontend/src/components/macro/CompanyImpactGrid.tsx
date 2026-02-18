@@ -19,23 +19,23 @@ interface CompanyImpactGridProps {
 const directionConfig = {
   positive: {
     icon: TrendingUp,
-    color: "text-green-600",
-    bgColor: "bg-green-50 border-green-200",
-    badgeColor: "bg-green-100 text-green-700",
+    color: "text-green-400",
+    bgColor: "bg-green-500/10 border-green-500/20",
+    badgeColor: "bg-green-500/15 text-green-400",
     label: "Positive",
   },
   negative: {
     icon: TrendingDown,
-    color: "text-red-600",
-    bgColor: "bg-red-50 border-red-200",
-    badgeColor: "bg-red-100 text-red-700",
+    color: "text-red-400",
+    bgColor: "bg-red-500/10 border-red-500/20",
+    badgeColor: "bg-red-500/15 text-red-400",
     label: "Negative",
   },
   neutral: {
     icon: Minus,
-    color: "text-gray-600",
-    bgColor: "bg-gray-50 border-gray-200",
-    badgeColor: "bg-gray-100 text-gray-700",
+    color: "text-gray-400",
+    bgColor: "bg-white/[0.03] border-white/[0.08]",
+    badgeColor: "bg-white/[0.08] text-gray-400",
     label: "Neutral",
   },
 };

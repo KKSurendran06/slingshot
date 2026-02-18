@@ -56,10 +56,10 @@ export default function PortfolioOverview({ metrics }: PortfolioOverviewProps) {
 
   const riskColor =
     metrics.risk_score >= 8
-      ? "text-red-600"
+      ? "text-red-400"
       : metrics.risk_score >= 5
-        ? "text-amber-600"
-        : "text-green-600";
+        ? "text-amber-400"
+        : "text-green-400";
 
   const riskLabel =
     metrics.risk_score >= 8
@@ -108,8 +108,8 @@ export default function PortfolioOverview({ metrics }: PortfolioOverviewProps) {
               className={cn(
                 "text-2xl font-bold font-mono",
                 metrics.total_return_pct >= 0
-                  ? "text-green-600"
-                  : "text-red-600"
+                  ? "text-green-400"
+                  : "text-red-400"
               )}
             >
               {metrics.total_return_pct >= 0 ? "+" : ""}

@@ -72,7 +72,7 @@ export default function PortfolioPage() {
   return (
     <div className="flex flex-col h-full">
       {/* Action bar */}
-      <div className="border-b bg-background px-6 py-4">
+      <div className="border-b border-white/[0.06] px-6 py-4">
         <div className="mx-auto max-w-4xl flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Briefcase className="h-5 w-5 text-muted-foreground" />
@@ -124,7 +124,7 @@ export default function PortfolioPage() {
       {/* Content area: Thought Log + Report */}
       <div className="flex-1 overflow-hidden grid grid-cols-1 lg:grid-cols-5 gap-0">
         {/* Thought Log — left panel */}
-        <div className="lg:col-span-2 border-r overflow-hidden p-4">
+        <div className="lg:col-span-2 border-r border-white/[0.06] overflow-hidden p-4">
           <ThoughtLog
             thoughts={portfolio.thoughts}
             status={portfolio.currentStatus}

@@ -40,9 +40,9 @@ function renderContent(text: string) {
           <thead>
             <tr>
               {headers.map((h, i) => (
-                <th
+                  <th
                   key={i}
-                  className="border border-border bg-muted px-2 py-1.5 text-left font-semibold"
+                  className="border border-white/[0.06] bg-white/[0.04] px-2 py-1.5 text-left font-semibold"
                 >
                   {h.trim()}
                 </th>
@@ -51,9 +51,9 @@ function renderContent(text: string) {
           </thead>
           <tbody>
             {body.map((row, ri) => (
-              <tr key={ri} className={ri % 2 === 0 ? "" : "bg-muted/40"}>
+              <tr key={ri} className={ri % 2 === 0 ? "" : "bg-white/[0.02]"}>
                 {row.map((cell, ci) => (
-                  <td key={ci} className="border border-border px-2 py-1">
+                  <td key={ci} className="border border-white/[0.06] px-2 py-1">
                     {formatInline(cell.trim())}
                   </td>
                 ))}
@@ -171,7 +171,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
     >
       {/* Agent avatar */}
       {!isUser && (
-        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary mt-0.5">
+        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary mt-0.5">
           <Bot className="h-3.5 w-3.5" />
         </div>
       )}
@@ -181,7 +181,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
           "max-w-[85%] rounded-xl px-3.5 py-2.5",
           isUser
             ? "bg-primary text-primary-foreground"
-            : "bg-muted border border-border"
+            : "bg-white/[0.04] border border-white/[0.06]"
         )}
       >
         {/* Thinking steps */}
@@ -253,14 +253,14 @@ export default function AgentChat() {
   };
 
   return (
-    <div className="flex flex-col h-full border rounded-lg bg-card">
+    <div className="flex flex-col h-full border border-white/[0.06] rounded-2xl bg-white/[0.03] backdrop-blur-sm">
       {/* Header */}
-      <div className="flex items-center justify-between border-b px-4 py-3">
+      <div className="flex items-center justify-between border-b border-white/[0.06] px-4 py-3">
         <div className="flex items-center gap-2">
           <MessageSquare className="h-4 w-4 text-primary" />
           <span className="text-sm font-semibold">Ask the Agent</span>
           {isAgentTyping && (
-            <Badge variant="secondary" className="text-xs bg-amber-100 text-amber-700">
+            <Badge variant="secondary" className="text-xs bg-amber-500/15 text-amber-400">
               <Loader2 className="mr-1 h-3 w-3 animate-spin" />
               Analyzing
             </Badge>
@@ -319,7 +319,7 @@ export default function AgentChat() {
       {/* Input area */}
       <form
         onSubmit={handleSubmit}
-        className="flex items-center gap-2 border-t px-3 py-2.5"
+        className="flex items-center gap-2 border-t border-white/[0.06] px-3 py-2.5"
       >
         <input
           ref={inputRef}
@@ -328,7 +328,7 @@ export default function AgentChat() {
           placeholder="Ask a follow-up question..."
           disabled={isAgentTyping}
           className={cn(
-            "flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground",
+            "flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground/60",
             "disabled:opacity-50"
           )}
         />

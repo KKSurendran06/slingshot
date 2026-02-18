@@ -13,19 +13,19 @@ interface TradeIdeasTableProps {
 
 const actionConfig = {
   LONG: {
-    color: "bg-green-100 text-green-700 border-green-300",
-    glow: "shadow-green-200/50",
+    color: "bg-green-500/15 text-green-400 border-green-500/30",
+    glow: "shadow-green-500/20",
   },
   SHORT: {
-    color: "bg-red-100 text-red-700 border-red-300",
-    glow: "shadow-red-200/50",
+    color: "bg-red-500/15 text-red-400 border-red-500/30",
+    glow: "shadow-red-500/20",
   },
 };
 
 const convictionConfig = {
-  high: { color: "bg-amber-100 text-amber-700", label: "HIGH" },
-  medium: { color: "bg-blue-100 text-blue-700", label: "MED" },
-  low: { color: "bg-gray-100 text-gray-700", label: "LOW" },
+  high: { color: "bg-amber-500/15 text-amber-400", label: "HIGH" },
+  medium: { color: "bg-blue-500/15 text-blue-400", label: "MED" },
+  low: { color: "bg-white/[0.08] text-gray-400", label: "LOW" },
 };
 
 /**
@@ -96,7 +96,7 @@ export default function TradeIdeasTable({ ideas }: TradeIdeasTableProps) {
                       {idea.entry_price?.toLocaleString("en-IN")}
                     </td>
                     <td className="py-3 pr-3 text-right font-mono text-xs">
-                      <span className={idea.action === "LONG" ? "text-green-600" : "text-red-600"}>
+                      <span className={idea.action === "LONG" ? "text-green-400" : "text-red-400"}>
                         {idea.target_price?.toLocaleString("en-IN")}
                       </span>
                       {returnPct && (

@@ -42,7 +42,7 @@ export default function CollapsibleReport({
         onClick={() => setIsExpanded(!isExpanded)}
         className={cn(
           "w-full flex items-center justify-between px-4 py-3 rounded-lg border transition-colors",
-          "bg-muted/30 hover:bg-muted/50",
+          "bg-white/[0.04] hover:bg-white/[0.06]",
           isExpanded && "rounded-b-none border-b-0"
         )}
       >
