@@ -8,7 +8,7 @@ export default function AppLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="dark bg-[#0a0a0b]">
+    <div className="dark bg-[#1c1c1e]">
       <TooltipProvider>
         <div className="flex h-screen overflow-hidden">
           <Sidebar />

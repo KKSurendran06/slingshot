@@ -5,19 +5,19 @@ import { Slot } from "radix-ui"
 import { cn } from "@/lib/utils"
 
 const badgeVariants = cva(
-  "inline-flex items-center justify-center rounded-full border border-transparent px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 aria-invalid:border-destructive transition-all duration-200 overflow-hidden",
+  "inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 transition-colors duration-200",
   {
     variants: {
       variant: {
-        default: "bg-violet-500/15 text-violet-300 border-violet-500/20 [a&]:hover:bg-violet-500/25",
+        default: "border-border bg-secondary text-secondary-foreground [a&]:hover:bg-accent",
         secondary:
-          "bg-white/[0.06] text-white/60 border-white/[0.08] [a&]:hover:bg-white/[0.1]",
+          "border-transparent bg-muted text-muted-foreground [a&]:hover:bg-accent",
         destructive:
-          "bg-red-500/15 text-red-400 border-red-500/20 [a&]:hover:bg-red-500/25",
+          "border-destructive/20 bg-destructive/10 text-destructive [a&]:hover:bg-destructive/15",
         outline:
-          "border-white/[0.1] text-white/60 [a&]:hover:bg-white/[0.06]",
-        ghost: "text-white/50 [a&]:hover:bg-white/[0.06]",
-        link: "text-violet-400 underline-offset-4 [a&]:hover:underline",
+          "border-border text-muted-foreground bg-transparent [a&]:hover:bg-muted",
+        ghost: "border-transparent text-muted-foreground [a&]:hover:bg-muted",
+        link: "border-transparent text-primary underline-offset-4 [a&]:hover:underline p-0",
       },
     },
     defaultVariants: {

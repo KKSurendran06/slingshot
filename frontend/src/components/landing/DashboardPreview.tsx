@@ -13,7 +13,7 @@ import {
   Globe,
 } from "lucide-react";
 
-/* ── Thought steps mockup ──────────────────────── */
+/* -- Thought steps mockup -- */
 const thoughts = [
   { icon: Search, label: "Decomposing query", status: "done" as const },
   { icon: Globe, label: "Fetching live financials", status: "done" as const },
@@ -22,7 +22,7 @@ const thoughts = [
   { icon: CheckCircle2, label: "Quality check", status: "pending" as const },
 ];
 
-/* ── Report lines mockup ───────────────────────── */
+/* -- Report lines mockup -- */
 const reportLines = [
   { width: "100%", highlight: true },
   { width: "85%", highlight: false },
@@ -34,7 +34,7 @@ const reportLines = [
   { width: "45%", highlight: false },
 ];
 
-/* ── Holdings mockup ───────────────────────────── */
+/* -- Holdings mockup -- */
 const holdings = [
   { name: "HDFC Bank", change: "+2.4%", positive: true },
   { name: "Reliance", change: "+1.8%", positive: true },
@@ -49,7 +49,7 @@ export default function DashboardPreview() {
     offset: ["start end", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [60, -60]);
+  const y = useTransform(scrollYProgress, [0, 1], [40, -40]);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
   return (
@@ -61,23 +61,23 @@ export default function DashboardPreview() {
       {/* Section header */}
       <div className="max-w-4xl mx-auto text-center mb-16">
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-xs uppercase tracking-[0.25em] text-white/30 font-medium mb-4"
+          transition={{ duration: 0.3 }}
+          className="text-xs uppercase tracking-[0.25em] text-muted-foreground font-medium mb-4"
         >
           Product Preview
         </motion.p>
         <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-          className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-6"
+          transition={{ duration: 0.3, delay: 0.05 }}
+          className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-6"
         >
           See the engine{" "}
-          <span className="text-white/40">at work</span>
+          <span className="text-muted-foreground">at work</span>
         </motion.h2>
       </div>
 
@@ -87,28 +87,18 @@ export default function DashboardPreview() {
         className="max-w-5xl mx-auto"
       >
         <div className="relative">
-          {/* Ambient glow behind dashboard */}
-          <div
-            className="absolute -inset-4 rounded-3xl opacity-60"
-            style={{
-              background:
-                "radial-gradient(ellipse at 50% 50%, rgba(124, 58, 237, 0.08) 0%, transparent 70%)",
-            }}
-            aria-hidden="true"
-          />
-
           {/* Dashboard container */}
-          <div className="relative glass rounded-2xl border border-white/[0.08] overflow-hidden shadow-2xl shadow-black/40">
+          <div className="relative rounded-xl bg-card border border-border overflow-hidden shadow-lg shadow-black/20">
             {/* Title bar */}
-            <div className="flex items-center gap-2 px-5 py-3.5 border-b border-white/[0.06] bg-white/[0.02]">
+            <div className="flex items-center gap-2 px-5 py-3.5 border-b border-border bg-secondary">
               <div className="flex gap-1.5">
-                <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
-                <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
-                <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
               </div>
               <div className="flex-1 flex justify-center">
-                <div className="glass rounded-md px-24 py-1">
-                  <span className="text-[10px] text-white/25 font-mono">
+                <div className="bg-muted rounded-md px-24 py-1 border border-border">
+                  <span className="text-[10px] text-muted-foreground font-mono">
                     slingshot.ai/research
                   </span>
                 </div>
@@ -119,10 +109,10 @@ export default function DashboardPreview() {
             {/* Dashboard content — 3-column layout */}
             <div className="grid grid-cols-12 min-h-[420px]">
               {/* Left: Thought log */}
-              <div className="col-span-3 border-r border-white/[0.06] p-4">
+              <div className="col-span-3 border-r border-border p-4">
                 <div className="flex items-center gap-2 mb-4">
-                  <Brain className="h-3.5 w-3.5 text-violet-400/70" />
-                  <span className="text-[11px] font-medium text-white/50">
+                  <Brain className="h-3.5 w-3.5 text-muted-foreground" />
+                  <span className="text-[11px] font-medium text-muted-foreground">
                     Reasoning
                   </span>
                 </div>
@@ -131,45 +121,45 @@ export default function DashboardPreview() {
                   {thoughts.map((t, i) => (
                     <motion.div
                       key={i}
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
                       viewport={{ once: true }}
-                      transition={{ delay: 0.8 + i * 0.15, duration: 0.5 }}
+                      transition={{ delay: 0.6 + i * 0.1, duration: 0.3 }}
                       className="flex items-center gap-2.5"
                     >
                       <div
                         className={`w-5 h-5 rounded-md flex items-center justify-center shrink-0 ${
                           t.status === "done"
-                            ? "bg-emerald-500/10"
+                            ? "bg-[#30d158]/10"
                             : t.status === "active"
-                            ? "bg-violet-500/15"
-                            : "bg-white/[0.04]"
+                            ? "bg-primary/10"
+                            : "bg-secondary"
                         }`}
                       >
                         <t.icon
                           className={`h-2.5 w-2.5 ${
                             t.status === "done"
-                              ? "text-emerald-400/70"
+                              ? "text-[#30d158]"
                               : t.status === "active"
-                              ? "text-violet-400/70"
-                              : "text-white/20"
+                              ? "text-primary"
+                              : "text-muted-foreground"
                           }`}
                         />
                       </div>
                       <span
                         className={`text-[11px] ${
                           t.status === "done"
-                            ? "text-white/50"
+                            ? "text-muted-foreground"
                             : t.status === "active"
-                            ? "text-white/70 font-medium"
-                            : "text-white/20"
+                            ? "text-foreground font-medium"
+                            : "text-muted-foreground/50"
                         }`}
                       >
                         {t.label}
                       </span>
                       {t.status === "active" && (
                         <motion.div
-                          className="w-1 h-1 rounded-full bg-violet-400/70 ml-auto"
+                          className="w-1 h-1 rounded-full bg-primary ml-auto"
                           animate={{ opacity: [1, 0.3, 1] }}
                           transition={{ duration: 1.5, repeat: Infinity }}
                         />
@@ -180,10 +170,10 @@ export default function DashboardPreview() {
               </div>
 
               {/* Center: Report */}
-              <div className="col-span-5 border-r border-white/[0.06] p-5">
+              <div className="col-span-5 border-r border-border p-5">
                 <div className="flex items-center gap-2 mb-5">
-                  <FileText className="h-3.5 w-3.5 text-blue-400/70" />
-                  <span className="text-[11px] font-medium text-white/50">
+                  <FileText className="h-3.5 w-3.5 text-muted-foreground" />
+                  <span className="text-[11px] font-medium text-muted-foreground">
                     Analysis Report
                   </span>
                 </div>
@@ -195,28 +185,26 @@ export default function DashboardPreview() {
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
                       viewport={{ once: true }}
-                      transition={{ delay: 1.2, duration: 0.6 }}
-                      className="h-4 w-48 rounded bg-white/[0.08] mb-3"
+                      transition={{ delay: 1, duration: 0.3 }}
+                      className="h-4 w-48 rounded bg-secondary mb-3"
                     />
                     <div className="space-y-2">
                       {reportLines.map((line, i) => (
                         <motion.div
                           key={i}
-                          initial={{ opacity: 0, scaleX: 0 }}
-                          whileInView={{ opacity: 1, scaleX: 1 }}
+                          initial={{ opacity: 0 }}
+                          whileInView={{ opacity: 1 }}
                           viewport={{ once: true }}
                           transition={{
-                            delay: 1.4 + i * 0.08,
-                            duration: 0.5,
-                            ease: "easeOut",
+                            delay: 1.1 + i * 0.06,
+                            duration: 0.3,
                           }}
-                          className="origin-left"
                         >
                           <div
                             className={`h-2 rounded-full ${
                               line.highlight
-                                ? "bg-gradient-to-r from-violet-500/20 to-blue-500/10"
-                                : "bg-white/[0.04]"
+                                ? "bg-primary/15"
+                                : "bg-secondary"
                             }`}
                             style={{ width: line.width }}
                           />
@@ -227,22 +215,22 @@ export default function DashboardPreview() {
 
                   {/* Metrics row */}
                   <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
-                    transition={{ delay: 2, duration: 0.5 }}
+                    transition={{ delay: 1.6, duration: 0.3 }}
                     className="grid grid-cols-3 gap-2 mt-4"
                   >
                     {[
-                      { label: "P/E", value: "19.2x", color: "text-emerald-400/70" },
-                      { label: "ROE", value: "16.5%", color: "text-blue-400/70" },
-                      { label: "NIM", value: "3.65%", color: "text-violet-400/70" },
+                      { label: "P/E", value: "19.2x", color: "text-[#30d158]" },
+                      { label: "ROE", value: "16.5%", color: "text-[#0a84ff]" },
+                      { label: "NIM", value: "3.65%", color: "text-[#ff9f0a]" },
                     ].map((m) => (
                       <div
                         key={m.label}
-                        className="rounded-lg bg-white/[0.03] border border-white/[0.05] p-2.5 text-center"
+                        className="rounded-lg bg-secondary border border-border p-2.5 text-center"
                       >
-                        <p className="text-[10px] text-white/30 mb-0.5">{m.label}</p>
+                        <p className="text-[10px] text-muted-foreground mb-0.5">{m.label}</p>
                         <p className={`text-sm font-semibold ${m.color}`}>{m.value}</p>
                       </div>
                     ))}
@@ -253,8 +241,8 @@ export default function DashboardPreview() {
               {/* Right: Chat + Portfolio mini */}
               <div className="col-span-4 p-4 flex flex-col">
                 <div className="flex items-center gap-2 mb-4">
-                  <MessageSquare className="h-3.5 w-3.5 text-cyan-400/70" />
-                  <span className="text-[11px] font-medium text-white/50">
+                  <MessageSquare className="h-3.5 w-3.5 text-muted-foreground" />
+                  <span className="text-[11px] font-medium text-muted-foreground">
                     Agent Chat
                   </span>
                 </div>
@@ -262,28 +250,28 @@ export default function DashboardPreview() {
                 {/* Chat messages */}
                 <div className="space-y-3 mb-auto">
                   <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
-                    transition={{ delay: 1.6, duration: 0.5 }}
+                    transition={{ delay: 1.3, duration: 0.3 }}
                     className="ml-auto max-w-[80%]"
                   >
-                    <div className="rounded-xl rounded-br-sm bg-violet-500/15 border border-violet-500/10 px-3 py-2">
-                      <p className="text-[11px] text-white/60">
+                    <div className="rounded-xl rounded-br-sm bg-primary/10 border border-primary/20 px-3 py-2">
+                      <p className="text-[11px] text-foreground">
                         How does HDFC compare to ICICI on asset quality?
                       </p>
                     </div>
                   </motion.div>
 
                   <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
-                    transition={{ delay: 2, duration: 0.5 }}
+                    transition={{ delay: 1.6, duration: 0.3 }}
                     className="max-w-[85%]"
                   >
-                    <div className="rounded-xl rounded-bl-sm bg-white/[0.04] border border-white/[0.06] px-3 py-2">
-                      <p className="text-[11px] text-white/50">
+                    <div className="rounded-xl rounded-bl-sm bg-muted border border-border px-3 py-2">
+                      <p className="text-[11px] text-muted-foreground">
                         HDFC&apos;s GNPA at 1.24% edges out ICICI&apos;s 2.30%.
                         Net NPA gap is even wider at 0.33% vs 0.44%...
                       </p>
@@ -293,31 +281,31 @@ export default function DashboardPreview() {
 
                 {/* Mini portfolio widget */}
                 <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 2.2, duration: 0.5 }}
-                  className="mt-4 rounded-xl bg-white/[0.02] border border-white/[0.05] p-3"
+                  transition={{ delay: 1.8, duration: 0.3 }}
+                  className="mt-4 rounded-lg bg-secondary border border-border p-3"
                 >
                   <div className="flex items-center gap-1.5 mb-2.5">
-                    <BarChart3 className="h-3 w-3 text-white/30" />
-                    <span className="text-[10px] text-white/30 font-medium">
+                    <BarChart3 className="h-3 w-3 text-muted-foreground" />
+                    <span className="text-[10px] text-muted-foreground font-medium">
                       Portfolio
                     </span>
-                    <TrendingUp className="h-3 w-3 text-emerald-400/50 ml-auto" />
-                    <span className="text-[10px] text-emerald-400/60 font-medium">
+                    <TrendingUp className="h-3 w-3 text-[#30d158] ml-auto" />
+                    <span className="text-[10px] text-[#30d158] font-medium">
                       +12.4%
                     </span>
                   </div>
                   <div className="space-y-1.5">
                     {holdings.map((h) => (
                       <div key={h.name} className="flex justify-between items-center">
-                        <span className="text-[10px] text-white/40">
+                        <span className="text-[10px] text-muted-foreground">
                           {h.name}
                         </span>
                         <span
                           className={`text-[10px] font-medium ${
-                            h.positive ? "text-emerald-400/60" : "text-red-400/60"
+                            h.positive ? "text-[#30d158]" : "text-[#ff453a]"
                           }`}
                         >
                           {h.change}

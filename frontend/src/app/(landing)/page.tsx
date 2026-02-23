@@ -6,7 +6,7 @@ import Footer from "@/components/landing/Footer";
 
 export default function LandingPage() {
   return (
-    <main className="relative overflow-hidden">
+    <main className="relative">
       <HeroSection />
       <FeatureCards />
       <DashboardPreview />

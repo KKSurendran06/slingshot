@@ -56,10 +56,10 @@ export default function PortfolioOverview({ metrics }: PortfolioOverviewProps) {
 
   const riskColor =
     metrics.risk_score >= 8
-      ? "text-red-400"
+      ? "text-[#ff453a]"
       : metrics.risk_score >= 5
-        ? "text-amber-400"
-        : "text-green-400";
+        ? "text-[#ff9f0a]"
+        : "text-[#30d158]";
 
   const riskLabel =
     metrics.risk_score >= 8
@@ -72,9 +72,9 @@ export default function PortfolioOverview({ metrics }: PortfolioOverviewProps) {
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
       {/* Total Value */}
       <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0, duration: 0.4 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0, duration: 0.2 }}
       >
         <Card>
           <CardContent className="pt-4 pb-4">
@@ -94,9 +94,9 @@ export default function PortfolioOverview({ metrics }: PortfolioOverviewProps) {
 
       {/* Total Return */}
       <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1, duration: 0.4 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.05, duration: 0.2 }}
       >
         <Card>
           <CardContent className="pt-4 pb-4">
@@ -108,8 +108,8 @@ export default function PortfolioOverview({ metrics }: PortfolioOverviewProps) {
               className={cn(
                 "text-2xl font-bold font-mono",
                 metrics.total_return_pct >= 0
-                  ? "text-green-400"
-                  : "text-red-400"
+                  ? "text-[#30d158]"
+                  : "text-[#ff453a]"
               )}
             >
               {metrics.total_return_pct >= 0 ? "+" : ""}
@@ -125,9 +125,9 @@ export default function PortfolioOverview({ metrics }: PortfolioOverviewProps) {
 
       {/* Risk Score */}
       <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, duration: 0.4 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.1, duration: 0.2 }}
       >
         <Card>
           <CardContent className="pt-4 pb-4">

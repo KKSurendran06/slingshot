@@ -71,7 +71,7 @@ export default function MacroReport({
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="prose prose-sm max-w-none dark:prose-invert">
+            <div className="text-sm leading-relaxed text-muted-foreground">
               <ReportContent text={executiveSummary} citations={citations} />
             </div>
           </CardContent>

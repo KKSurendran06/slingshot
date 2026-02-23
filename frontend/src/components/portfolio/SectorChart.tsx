@@ -10,14 +10,14 @@ interface SectorChartProps {
 }
 
 const COLORS = [
-  "var(--chart-1)",
-  "var(--chart-2)",
-  "var(--chart-3)",
-  "var(--chart-4)",
-  "var(--chart-5)",
-  "#6366f1",
-  "#ec4899",
-  "#14b8a6",
+  "#0a84ff",
+  "#30d158",
+  "#ff9f0a",
+  "#ff453a",
+  "#bf5af2",
+  "#64d2ff",
+  "#ff375f",
+  "#ac8e68",
 ];
 
 /**
@@ -81,7 +81,7 @@ export default function SectorChart({ allocation }: SectorChartProps) {
             {allocation.map((sector, i) => (
               <div key={sector.sector} className="flex items-center gap-2 text-xs">
                 <div
-                  className="h-2.5 w-2.5 rounded-full shrink-0"
+                  className="h-2.5 w-2.5 rounded shrink-0"
                   style={{ backgroundColor: COLORS[i % COLORS.length] }}
                 />
                 <span className="text-muted-foreground truncate">

@@ -13,19 +13,17 @@ interface TradeIdeasTableProps {
 
 const actionConfig = {
   LONG: {
-    color: "bg-green-500/15 text-green-400 border-green-500/30",
-    glow: "shadow-green-500/20",
+    color: "bg-[#30d158]/10 text-[#30d158] border-[#30d158]/20",
   },
   SHORT: {
-    color: "bg-red-500/15 text-red-400 border-red-500/30",
-    glow: "shadow-red-500/20",
+    color: "bg-[#ff453a]/10 text-[#ff453a] border-[#ff453a]/20",
   },
 };
 
 const convictionConfig = {
-  high: { color: "bg-amber-500/15 text-amber-400", label: "HIGH" },
-  medium: { color: "bg-blue-500/15 text-blue-400", label: "MED" },
-  low: { color: "bg-white/[0.08] text-gray-400", label: "LOW" },
+  high: { color: "bg-[#ff9f0a]/10 text-[#ff9f0a]", label: "HIGH" },
+  medium: { color: "bg-[#0a84ff]/10 text-[#0a84ff]", label: "MED" },
+  low: { color: "bg-secondary text-muted-foreground", label: "LOW" },
 };
 
 /**
@@ -47,7 +45,7 @@ export default function TradeIdeasTable({ ideas }: TradeIdeasTableProps) {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b text-xs text-muted-foreground">
+              <tr className="border-b border-border text-xs text-muted-foreground">
                 <th className="text-left py-2 pr-3 font-medium">Action</th>
                 <th className="text-left py-2 pr-3 font-medium">Ticker</th>
                 <th className="text-right py-2 pr-3 font-medium">Entry</th>
@@ -75,17 +73,16 @@ export default function TradeIdeasTable({ ideas }: TradeIdeasTableProps) {
                 return (
                   <motion.tr
                     key={idea.ticker}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.15, duration: 0.3 }}
-                    className="border-b last:border-0"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: i * 0.08, duration: 0.2 }}
+                    className="border-b border-border last:border-0"
                   >
                     <td className="py-3 pr-3">
                       <Badge
                         className={cn(
-                          "text-xs font-bold shadow-sm",
-                          action.color,
-                          action.glow
+                          "text-xs font-bold",
+                          action.color
                         )}
                       >
                         {idea.action}
@@ -96,7 +93,7 @@ export default function TradeIdeasTable({ ideas }: TradeIdeasTableProps) {
                       {idea.entry_price?.toLocaleString("en-IN")}
                     </td>
                     <td className="py-3 pr-3 text-right font-mono text-xs">
-                      <span className={idea.action === "LONG" ? "text-green-400" : "text-red-400"}>
+                      <span className={idea.action === "LONG" ? "text-[#30d158]" : "text-[#ff453a]"}>
                         {idea.target_price?.toLocaleString("en-IN")}
                       </span>
                       {returnPct && (

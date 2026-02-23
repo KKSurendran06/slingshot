@@ -19,23 +19,23 @@ interface CompanyImpactGridProps {
 const directionConfig = {
   positive: {
     icon: TrendingUp,
-    color: "text-green-400",
-    bgColor: "bg-green-500/10 border-green-500/20",
-    badgeColor: "bg-green-500/15 text-green-400",
+    color: "text-[#30d158]",
+    borderColor: "border-l-[#30d158]",
+    badgeColor: "bg-[#30d158]/10 text-[#30d158]",
     label: "Positive",
   },
   negative: {
     icon: TrendingDown,
-    color: "text-red-400",
-    bgColor: "bg-red-500/10 border-red-500/20",
-    badgeColor: "bg-red-500/15 text-red-400",
+    color: "text-[#ff453a]",
+    borderColor: "border-l-[#ff453a]",
+    badgeColor: "bg-[#ff453a]/10 text-[#ff453a]",
     label: "Negative",
   },
   neutral: {
     icon: Minus,
-    color: "text-gray-400",
-    bgColor: "bg-white/[0.03] border-white/[0.08]",
-    badgeColor: "bg-white/[0.08] text-gray-400",
+    color: "text-muted-foreground",
+    borderColor: "border-l-border",
+    badgeColor: "bg-secondary text-muted-foreground",
     label: "Neutral",
   },
 };
@@ -64,7 +64,7 @@ export default function CompanyImpactGrid({
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {companies.map((company, i) => {
             const config = directionConfig[company.impact_direction];
             const Icon = config.icon;
@@ -72,45 +72,45 @@ export default function CompanyImpactGrid({
             return (
               <motion.div
                 key={company.ticker}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: i * 0.08, duration: 0.3 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: i * 0.05, duration: 0.2 }}
               >
                 <div
                   className={cn(
-                    "rounded-lg border p-3 h-full flex flex-col",
-                    config.bgColor
+                    "rounded-lg border border-border border-l-2 bg-card p-3 h-full flex flex-col min-w-0",
+                    config.borderColor
                   )}
                 >
-                  {/* Header: Ticker + Direction */}
-                  <div className="flex items-center justify-between mb-1.5">
-                    <span className="font-bold text-sm">
+                  {/* Header: Ticker + Magnitude badge */}
+                  <div className="flex items-center gap-2 mb-1.5 min-w-0">
+                    <span className="font-bold text-sm truncate shrink min-w-0">
                       {company.ticker}
                     </span>
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-1 shrink-0 ml-auto">
                       <Icon className={cn("h-3.5 w-3.5", config.color)} />
-                      <Badge className={cn("text-[10px] px-1.5 py-0", config.badgeColor)}>
+                      <Badge className={cn("text-[10px] px-1.5 py-0 whitespace-nowrap", config.badgeColor)}>
                         {magnitudeLabels[company.impact_magnitude]}
                       </Badge>
                     </div>
                   </div>
 
                   {/* Company name */}
-                  <p className="text-xs text-muted-foreground mb-2 line-clamp-1">
+                  <p className="text-xs text-muted-foreground mb-2 truncate">
                     {company.company_name}
                   </p>
 
                   {/* Impact description */}
-                  <p className="text-xs leading-relaxed flex-1 line-clamp-3">
+                  <p className="text-xs leading-relaxed text-muted-foreground flex-1 line-clamp-2">
                     {company.projected_impact.split(".")[0]}.
                   </p>
 
                   {/* Confidence */}
-                  <div className="mt-2 flex items-center justify-between">
-                    <span className="text-[10px] text-muted-foreground">
+                  <div className="mt-2 pt-2 border-t border-border flex items-center justify-between gap-2 min-w-0">
+                    <span className="text-[10px] text-muted-foreground truncate min-w-0">
                       {company.exposure_type.split(" - ")[0]}
                     </span>
-                    <Badge variant="outline" className="text-[10px] px-1.5 py-0">
+                    <Badge variant="outline" className="text-[10px] px-1.5 py-0 shrink-0">
                       {Math.round(company.confidence * 100)}%
                     </Badge>
                   </div>

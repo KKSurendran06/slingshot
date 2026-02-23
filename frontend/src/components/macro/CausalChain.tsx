@@ -47,12 +47,12 @@ export default function CausalChain({ links }: CausalChainProps) {
           {nodes.map((node, i) => (
             <div key={node} className="flex items-center gap-1 shrink-0">
               <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: i * 0.4, duration: 0.4 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: i * 0.15, duration: 0.2 }}
               >
                 <div className="flex flex-col items-center">
-                  <div className="rounded-lg border-2 border-primary/20 bg-primary/10 px-3 py-2 text-center min-w-[120px] max-w-[160px]">
+                  <div className="rounded-lg border border-border bg-secondary px-3 py-2 text-center min-w-[120px] max-w-[160px]">
                     <span className="text-xs font-medium leading-tight">
                       {node}
                     </span>
@@ -70,11 +70,11 @@ export default function CausalChain({ links }: CausalChainProps) {
               </motion.div>
               {i < nodes.length - 1 && (
                 <motion.div
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.4 + 0.2, duration: 0.3 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: i * 0.15 + 0.1, duration: 0.2 }}
                 >
-                  <ArrowRight className="h-4 w-4 text-primary/40 shrink-0 mx-1" />
+                  <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0 mx-1" />
                 </motion.div>
               )}
             </div>
@@ -86,17 +86,17 @@ export default function CausalChain({ links }: CausalChainProps) {
           {links.map((link, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.3, duration: 0.3 }}
-              className="rounded-lg border p-3"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: i * 0.1, duration: 0.2 }}
+              className="rounded-lg border border-border p-3"
             >
               <div className="flex items-center gap-2 text-xs">
-                <span className="font-medium text-primary">
+                <span className="font-medium text-foreground">
                   {link.from_event}
                 </span>
                 <ArrowRight className="h-3 w-3 text-muted-foreground shrink-0" />
-                <span className="font-medium text-primary">
+                <span className="font-medium text-foreground">
                   {link.to_event}
                 </span>
               </div>

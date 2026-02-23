@@ -26,14 +26,14 @@ export default function SearchBar({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex w-full gap-2">
+    <form onSubmit={handleSubmit} className="flex w-full gap-3">
       <div className="relative flex-1">
-        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={placeholder}
-          className="pl-10 h-12 text-base"
+          className="pl-10 h-11 text-sm"
           disabled={isLoading}
         />
       </div>

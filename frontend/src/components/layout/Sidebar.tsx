@@ -35,19 +35,19 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden md:flex w-64 flex-col border-r border-white/[0.06] bg-white/[0.02]">
+    <aside className="hidden md:flex w-60 flex-col border-r border-border bg-background">
       {/* Logo */}
-      <div className="flex h-14 items-center gap-2.5 border-b border-white/[0.06] px-5">
-        <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-indigo-600">
-          <Activity className="h-3.5 w-3.5 text-white" />
+      <div className="flex h-14 items-center gap-2.5 border-b border-border px-5">
+        <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary">
+          <Activity className="h-3.5 w-3.5 text-primary-foreground" />
         </div>
-        <span className="text-base font-bold tracking-tight text-white/90">
+        <span className="text-sm font-semibold tracking-tight text-foreground">
           Slingshot
         </span>
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 space-y-1 p-3">
+      <nav className="flex-1 space-y-0.5 p-3">
         {navItems.map((item) => {
           const isActive =
             pathname === item.href ||
@@ -57,30 +57,30 @@ export default function Sidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200",
+                "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors duration-200",
                 isActive
-                  ? "bg-white/[0.08] text-white shadow-[0_0_20px_rgba(167,139,250,0.06)]"
-                  : "text-white/40 hover:bg-white/[0.04] hover:text-white/70"
+                  ? "bg-accent text-foreground"
+                  : "text-muted-foreground hover:bg-accent hover:text-foreground"
               )}
             >
               <div
                 className={cn(
-                  "flex h-8 w-8 items-center justify-center rounded-lg transition-colors duration-200",
+                  "flex h-7 w-7 items-center justify-center rounded-md transition-colors duration-200",
                   isActive
-                    ? "bg-violet-500/15 text-violet-400"
-                    : "bg-white/[0.04] text-white/30"
+                    ? "bg-primary/10 text-primary"
+                    : "text-muted-foreground"
                 )}
               >
                 <item.icon className="h-4 w-4" />
               </div>
               <div>
-                <div className={isActive ? "text-white" : ""}>{item.label}</div>
-                <div
-                  className={cn(
-                    "text-[11px] leading-tight",
-                    isActive ? "text-white/40" : "text-white/20"
-                  )}
-                >
+                <div className={cn(
+                  "text-sm font-medium",
+                  isActive ? "text-foreground" : ""
+                )}>
+                  {item.label}
+                </div>
+                <div className="text-[11px] leading-tight text-muted-foreground">
                   {item.description}
                 </div>
               </div>
@@ -90,9 +90,9 @@ export default function Sidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="border-t border-white/[0.06] p-3">
-        <div className="rounded-xl bg-white/[0.03] border border-white/[0.05] px-3 py-2.5 text-xs text-white/25">
-          <span className="font-medium text-white/40">Slingshot v0.1</span>
+      <div className="border-t border-border p-3">
+        <div className="rounded-lg bg-muted px-3 py-2.5 text-xs text-muted-foreground">
+          <span className="font-medium text-foreground/60">Slingshot v0.1</span>
           <br />
           Agentic Research for Indian Markets
         </div>

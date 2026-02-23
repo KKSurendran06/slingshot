@@ -27,38 +27,38 @@ const stepTypeConfig: Record<
 > = {
   planning: {
     icon: BrainCircuit,
-    color: "text-purple-400",
+    color: "text-[#bf5af2]",
     label: "Planning",
   },
-  researching: { icon: Search, color: "text-blue-400", label: "Researching" },
+  researching: { icon: Search, color: "text-[#0a84ff]", label: "Researching" },
   analyzing: {
     icon: BarChart3,
-    color: "text-amber-400",
+    color: "text-[#ff9f0a]",
     label: "Analyzing",
   },
   reflecting: {
     icon: MessageSquare,
-    color: "text-teal-400",
+    color: "text-[#64d2ff]",
     label: "Reflecting",
   },
   reporting: {
     icon: FileText,
-    color: "text-green-400",
+    color: "text-[#30d158]",
     label: "Reporting",
   },
 };
 
 const statusConfig: Record<
   string,
-  { icon: React.ElementType; color: string; label: string }
+  { icon: React.ElementType; className: string; label: string }
 > = {
-  planning: { icon: BrainCircuit, color: "bg-purple-500/15 text-purple-400", label: "Planning" },
-  researching: { icon: Search, color: "bg-blue-500/15 text-blue-400", label: "Researching" },
-  analyzing: { icon: BarChart3, color: "bg-amber-500/15 text-amber-400", label: "Analyzing" },
-  reflecting: { icon: MessageSquare, color: "bg-teal-500/15 text-teal-400", label: "Reflecting" },
-  reporting: { icon: FileText, color: "bg-green-500/15 text-green-400", label: "Reporting" },
-  complete: { icon: CheckCircle2, color: "bg-green-500/15 text-green-400", label: "Complete" },
-  error: { icon: AlertCircle, color: "bg-red-500/15 text-red-400", label: "Error" },
+  planning: { icon: BrainCircuit, className: "bg-[#bf5af2]/10 text-[#bf5af2]", label: "Planning" },
+  researching: { icon: Search, className: "bg-[#0a84ff]/10 text-[#0a84ff]", label: "Researching" },
+  analyzing: { icon: BarChart3, className: "bg-[#ff9f0a]/10 text-[#ff9f0a]", label: "Analyzing" },
+  reflecting: { icon: MessageSquare, className: "bg-[#64d2ff]/10 text-[#64d2ff]", label: "Reflecting" },
+  reporting: { icon: FileText, className: "bg-[#30d158]/10 text-[#30d158]", label: "Reporting" },
+  complete: { icon: CheckCircle2, className: "bg-[#30d158]/10 text-[#30d158]", label: "Complete" },
+  error: { icon: AlertCircle, className: "bg-destructive/10 text-destructive", label: "Error" },
 };
 
 export default function ThoughtLog({ thoughts, status }: ThoughtLogProps) {
@@ -74,17 +74,17 @@ export default function ThoughtLog({ thoughts, status }: ThoughtLogProps) {
   const currentStatus = status ? statusConfig[status] : null;
 
   return (
-    <div className="flex flex-col h-full border border-white/[0.06] rounded-2xl bg-white/[0.03] backdrop-blur-sm">
+    <div className="flex flex-col h-full border border-border rounded-xl bg-card">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-white/[0.06] px-4 py-3">
+      <div className="flex items-center justify-between border-b border-border px-4 py-3">
         <div className="flex items-center gap-2">
-          <BrainCircuit className="h-4 w-4 text-primary" />
-          <span className="text-sm font-semibold">Reasoning Trace</span>
+          <BrainCircuit className="h-4 w-4 text-muted-foreground" />
+          <span className="text-sm font-medium text-foreground">Reasoning Trace</span>
         </div>
         {currentStatus && (
           <Badge
             variant="secondary"
-            className={cn("text-xs", currentStatus.color)}
+            className={cn("text-xs", currentStatus.className)}
           >
             {status !== "complete" && status !== "error" && (
               <Loader2 className="mr-1 h-3 w-3 animate-spin" />
@@ -102,7 +102,7 @@ export default function ThoughtLog({ thoughts, status }: ThoughtLogProps) {
       <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto p-4">
         {thoughts.length === 0 && !status && (
           <div className="flex flex-col items-center justify-center py-12 text-center text-muted-foreground">
-            <BrainCircuit className="mb-3 h-10 w-10 opacity-30" />
+            <BrainCircuit className="mb-3 h-8 w-8 opacity-20" />
             <p className="text-sm">
               Start a research query to see the reasoning trace here.
             </p>
@@ -121,17 +121,17 @@ export default function ThoughtLog({ thoughts, status }: ThoughtLogProps) {
             return (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.2 }}
                 className="mb-4 last:mb-0"
               >
                 {/* Step header */}
                 <div className="flex items-start gap-3">
                   <div
                     className={cn(
-                      "mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-muted",
+                      "mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-muted",
                       config.color
                     )}
                   >
@@ -139,7 +139,7 @@ export default function ThoughtLog({ thoughts, status }: ThoughtLogProps) {
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-medium">
+                      <span className="text-sm font-medium text-foreground">
                         {step.title}
                       </span>
                       {step.confidence != null && (
@@ -155,7 +155,7 @@ export default function ThoughtLog({ thoughts, status }: ThoughtLogProps) {
                     )}
                     {/* Tool executions */}
                     {step.tool_executions.length > 0 && (
-                      <div className="mt-2 flex flex-wrap gap-1">
+                      <div className="mt-2 flex flex-wrap gap-1.5">
                         {step.tool_executions.map((exec, j) => (
                           <Badge
                             key={j}

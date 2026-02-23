@@ -11,10 +11,10 @@ interface StressTestResultsProps {
 }
 
 const severityConfig = {
-  low: { barColor: "bg-green-500", textColor: "text-green-400" },
-  moderate: { barColor: "bg-amber-500", textColor: "text-amber-400" },
-  high: { barColor: "bg-orange-500", textColor: "text-orange-400" },
-  severe: { barColor: "bg-red-500", textColor: "text-red-400" },
+  low: { barColor: "bg-[#30d158]", textColor: "text-[#30d158]" },
+  moderate: { barColor: "bg-[#ff9f0a]", textColor: "text-[#ff9f0a]" },
+  high: { barColor: "bg-[#ff6723]", textColor: "text-[#ff6723]" },
+  severe: { barColor: "bg-[#ff453a]", textColor: "text-[#ff453a]" },
 };
 
 /**
@@ -49,9 +49,9 @@ export default function StressTestResults({
             return (
               <motion.div
                 key={test.scenario_name}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.15, duration: 0.3 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: i * 0.08, duration: 0.2 }}
               >
                 {/* Label row */}
                 <div className="flex items-center justify-between mb-1.5">
@@ -66,7 +66,7 @@ export default function StressTestResults({
                   <span
                     className={cn(
                       "text-sm font-bold font-mono",
-                      isPositive ? "text-green-400" : config.textColor
+                      isPositive ? "text-[#30d158]" : config.textColor
                     )}
                   >
                     {isPositive ? "+" : ""}
@@ -75,17 +75,17 @@ export default function StressTestResults({
                 </div>
 
                 {/* Animated bar */}
-                <div className="h-2 rounded-full bg-white/[0.06] overflow-hidden">
+                <div className="h-2 rounded-full bg-secondary overflow-hidden">
                   <motion.div
                     className={cn(
                       "h-full rounded-full",
-                      isPositive ? "bg-green-500" : config.barColor
+                      isPositive ? "bg-[#30d158]" : config.barColor
                     )}
                     initial={{ width: 0 }}
                     animate={{ width: `${barWidth}%` }}
                     transition={{
-                      delay: i * 0.15 + 0.3,
-                      duration: 0.8,
+                      delay: i * 0.08 + 0.2,
+                      duration: 0.5,
                       ease: "easeOut",
                     }}
                   />

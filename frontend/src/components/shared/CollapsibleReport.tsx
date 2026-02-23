@@ -41,8 +41,8 @@ export default function CollapsibleReport({
       <button
         onClick={() => setIsExpanded(!isExpanded)}
         className={cn(
-          "w-full flex items-center justify-between px-4 py-3 rounded-lg border transition-colors",
-          "bg-white/[0.04] hover:bg-white/[0.06]",
+          "w-full flex items-center justify-between px-4 py-3 rounded-lg border border-border transition-colors",
+          "bg-secondary hover:bg-muted",
           isExpanded && "rounded-b-none border-b-0"
         )}
       >
@@ -73,7 +73,7 @@ export default function CollapsibleReport({
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="overflow-hidden border border-t-0 rounded-b-lg"
+            className="overflow-hidden border border-border border-t-0 rounded-b-lg"
           >
             <div className="p-4 space-y-4">
               {/* Detailed Analysis */}
@@ -114,7 +114,7 @@ export default function CollapsibleReport({
                         className="overflow-hidden"
                       >
                         <CardContent>
-                          <div className="prose prose-sm max-w-none dark:prose-invert">
+                          <div className="text-sm leading-relaxed text-muted-foreground">
                             <ReportContent
                               text={fullReport}
                               citations={citations}
@@ -144,7 +144,7 @@ export default function CollapsibleReport({
                         return (
                           <div
                             key={i}
-                            className="flex items-start gap-3 rounded-lg border p-3 text-sm"
+                            className="flex items-start gap-3 rounded-lg border border-border p-3 text-sm"
                           >
                             <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded bg-muted">
                               <Icon className="h-3.5 w-3.5 text-muted-foreground" />

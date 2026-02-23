@@ -5,13 +5,13 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-white/[0.05]">
+    <footer className="relative border-t border-border">
       <div className="max-w-6xl mx-auto px-6 py-10">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
           {/* Brand */}
           <div className="flex items-center gap-2">
-            <Activity className="h-4 w-4 text-white/30" />
-            <span className="text-sm font-semibold text-white/50 tracking-tight">
+            <Activity className="h-4 w-4 text-muted-foreground" />
+            <span className="text-sm font-semibold text-foreground tracking-tight">
               Slingshot
             </span>
           </div>
@@ -22,7 +22,7 @@ export default function Footer() {
               <Link
                 key={label}
                 href={`/${label.toLowerCase()}`}
-                className="text-xs text-white/25 hover:text-white/50 transition-colors duration-300"
+                className="text-xs text-muted-foreground hover:text-foreground transition-colors duration-200"
               >
                 {label}
               </Link>
@@ -30,14 +30,14 @@ export default function Footer() {
           </nav>
 
           {/* Tagline */}
-          <p className="text-xs text-white/20 font-light">
+          <p className="text-xs text-muted-foreground font-light">
             Built for Indian Markets
           </p>
         </div>
 
         {/* Bottom line */}
-        <div className="mt-8 pt-6 border-t border-white/[0.04] text-center">
-          <p className="text-[11px] text-white/15">
+        <div className="mt-8 pt-6 border-t border-border text-center">
+          <p className="text-[11px] text-muted-foreground">
             &copy; {new Date().getFullYear()} Slingshot. Agentic research for the modern investor.
           </p>
         </div>
