@@ -30,7 +30,7 @@ export default function HoldingsTable({ holdings }: HoldingsTableProps) {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-border text-xs text-muted-foreground">
+              <tr className="text-xs text-muted-foreground">
                 <th className="text-left py-2 pr-3 font-medium">Ticker</th>
                 <th className="text-right py-2 pr-3 font-medium">Qty</th>
                 <th className="text-right py-2 pr-3 font-medium">Avg Cost</th>
@@ -54,7 +54,7 @@ export default function HoldingsTable({ holdings }: HoldingsTableProps) {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: i * 0.03, duration: 0.2 }}
-                    className="border-b border-border last:border-0"
+                    className="border-b border-[rgba(255,255,255,0.04)] last:border-0"
                   >
                     <td className="py-2.5 pr-3">
                       <div>
@@ -83,10 +83,10 @@ export default function HoldingsTable({ holdings }: HoldingsTableProps) {
                     <td className="py-2.5 text-right">
                       <Badge
                         className={cn(
-                          "text-[10px] font-mono px-1.5 py-0",
+                          "text-[10px] font-mono px-1.5 py-0 border-0 rounded-lg",
                           isPositive
-                            ? "bg-[#30d158]/10 text-[#30d158]"
-                            : "bg-[#ff453a]/10 text-[#ff453a]"
+                            ? "bg-[#22c55e]/10 text-[#22c55e]"
+                            : "bg-[#ef4444]/10 text-[#ef4444]"
                         )}
                       >
                         {isPositive ? "+" : ""}

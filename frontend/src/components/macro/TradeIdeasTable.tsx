@@ -13,16 +13,16 @@ interface TradeIdeasTableProps {
 
 const actionConfig = {
   LONG: {
-    color: "bg-[#30d158]/10 text-[#30d158] border-[#30d158]/20",
+    color: "bg-[#22c55e]/10 text-[#22c55e]",
   },
   SHORT: {
-    color: "bg-[#ff453a]/10 text-[#ff453a] border-[#ff453a]/20",
+    color: "bg-[#ef4444]/10 text-[#ef4444]",
   },
 };
 
 const convictionConfig = {
-  high: { color: "bg-[#ff9f0a]/10 text-[#ff9f0a]", label: "HIGH" },
-  medium: { color: "bg-[#0a84ff]/10 text-[#0a84ff]", label: "MED" },
+  high: { color: "bg-[#f59e0b]/10 text-[#f59e0b]", label: "HIGH" },
+  medium: { color: "bg-[#3b82f6]/10 text-[#3b82f6]", label: "MED" },
   low: { color: "bg-secondary text-muted-foreground", label: "LOW" },
 };
 
@@ -45,7 +45,7 @@ export default function TradeIdeasTable({ ideas }: TradeIdeasTableProps) {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-border text-xs text-muted-foreground">
+              <tr className="text-xs text-muted-foreground">
                 <th className="text-left py-2 pr-3 font-medium">Action</th>
                 <th className="text-left py-2 pr-3 font-medium">Ticker</th>
                 <th className="text-right py-2 pr-3 font-medium">Entry</th>
@@ -76,12 +76,12 @@ export default function TradeIdeasTable({ ideas }: TradeIdeasTableProps) {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: i * 0.08, duration: 0.2 }}
-                    className="border-b border-border last:border-0"
+                    className="border-b border-[rgba(255,255,255,0.04)] last:border-0"
                   >
                     <td className="py-3 pr-3">
                       <Badge
                         className={cn(
-                          "text-xs font-bold",
+                          "text-xs font-bold border-0 rounded-lg",
                           action.color
                         )}
                       >
@@ -93,7 +93,7 @@ export default function TradeIdeasTable({ ideas }: TradeIdeasTableProps) {
                       {idea.entry_price?.toLocaleString("en-IN")}
                     </td>
                     <td className="py-3 pr-3 text-right font-mono text-xs">
-                      <span className={idea.action === "LONG" ? "text-[#30d158]" : "text-[#ff453a]"}>
+                      <span className={idea.action === "LONG" ? "text-[#22c55e]" : "text-[#ef4444]"}>
                         {idea.target_price?.toLocaleString("en-IN")}
                       </span>
                       {returnPct && (
@@ -106,7 +106,7 @@ export default function TradeIdeasTable({ ideas }: TradeIdeasTableProps) {
                       {idea.stop_loss?.toLocaleString("en-IN")}
                     </td>
                     <td className="py-3 pr-3 text-center">
-                      <Badge className={cn("text-[10px]", conviction.color)}>
+                      <Badge className={cn("text-[10px] border-0 rounded-lg", conviction.color)}>
                         {conviction.label}
                       </Badge>
                     </td>

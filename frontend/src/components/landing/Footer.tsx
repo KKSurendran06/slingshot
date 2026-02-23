@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-border">
+    <footer className="relative border-t border-[rgba(255,255,255,0.06)]">
       <div className="max-w-6xl mx-auto px-6 py-10">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
           {/* Brand */}
@@ -36,7 +36,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom line */}
-        <div className="mt-8 pt-6 border-t border-border text-center">
+        <div className="mt-8 pt-6 border-t border-[rgba(255,255,255,0.06)] text-center">
           <p className="text-[11px] text-muted-foreground">
             &copy; {new Date().getFullYear()} Slingshot. Agentic research for the modern investor.
           </p>

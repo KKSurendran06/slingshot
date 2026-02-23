@@ -10,14 +10,14 @@ interface SectorChartProps {
 }
 
 const COLORS = [
-  "#0a84ff",
-  "#30d158",
-  "#ff9f0a",
-  "#ff453a",
-  "#bf5af2",
-  "#64d2ff",
-  "#ff375f",
-  "#ac8e68",
+  "#3b82f6",
+  "#22c55e",
+  "#f59e0b",
+  "#ef4444",
+  "#a855f7",
+  "#06b6d4",
+  "#f43f5e",
+  "#78716c",
 ];
 
 /**
@@ -67,10 +67,11 @@ export default function SectorChart({ allocation }: SectorChartProps) {
                 formatter={(value: number | undefined) => value != null ? `${value.toFixed(1)}%` : ""}
                 contentStyle={{
                   fontSize: "12px",
-                  borderRadius: "8px",
-                  border: "1px solid var(--border)",
-                  backgroundColor: "var(--popover)",
-                  color: "var(--popover-foreground)",
+                  borderRadius: "12px",
+                  border: "none",
+                  backgroundColor: "#1a1d23",
+                  color: "#e4e4e7",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
                 }}
               />
             </PieChart>
@@ -81,7 +82,7 @@ export default function SectorChart({ allocation }: SectorChartProps) {
             {allocation.map((sector, i) => (
               <div key={sector.sector} className="flex items-center gap-2 text-xs">
                 <div
-                  className="h-2.5 w-2.5 rounded shrink-0"
+                  className="h-2.5 w-2.5 rounded-full shrink-0"
                   style={{ backgroundColor: COLORS[i % COLORS.length] }}
                 />
                 <span className="text-muted-foreground truncate">

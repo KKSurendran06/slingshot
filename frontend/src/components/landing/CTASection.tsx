@@ -39,7 +39,7 @@ export default function CTASection() {
         >
           <Link href="/research">
             <button
-              className="group inline-flex items-center gap-3 px-10 py-4 rounded-xl text-base font-semibold text-white bg-primary hover:bg-primary/90 transition-colors duration-200"
+              className="group inline-flex items-center gap-3 px-10 py-4 rounded-xl text-base font-semibold text-white bg-primary hover:bg-primary/90 transition-colors duration-200 shadow-lg shadow-primary/20"
               aria-label="Start researching"
             >
               <span>Start Researching</span>

@@ -40,7 +40,7 @@ function renderContent(text: string) {
               {headers.map((h, i) => (
                 <th
                   key={i}
-                  className="border border-border bg-muted px-2 py-1.5 text-left font-medium text-foreground"
+                  className="bg-[#20242c] px-2 py-1.5 text-left font-medium text-foreground rounded-lg"
                 >
                   {h.trim()}
                 </th>
@@ -49,9 +49,9 @@ function renderContent(text: string) {
           </thead>
           <tbody>
             {body.map((row, ri) => (
-              <tr key={ri} className={ri % 2 === 0 ? "" : "bg-muted/50"}>
+              <tr key={ri}>
                 {row.map((cell, ci) => (
-                  <td key={ci} className="border border-border px-2 py-1 text-muted-foreground">
+                  <td key={ci} className="px-2 py-1 text-muted-foreground">
                     {formatInline(cell.trim())}
                   </td>
                 ))}
@@ -159,18 +159,19 @@ function MessageBubble({ message }: { message: ChatMessage }) {
       className={cn("flex gap-2.5 mb-4", isUser ? "justify-end" : "justify-start")}
     >
       {!isUser && (
-        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground mt-0.5">
+        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#20242c] text-muted-foreground mt-0.5">
           <Bot className="h-3.5 w-3.5" />
         </div>
       )}
 
       <div
         className={cn(
-          "max-w-[85%] rounded-xl px-3.5 py-2.5",
+          "max-w-[85%] rounded-2xl px-4 py-3",
           isUser
-            ? "bg-primary text-primary-foreground"
-            : "bg-muted border border-border"
+            ? "bg-[#3b82f6]/15 text-foreground"
+            : "bg-[#20242c]"
         )}
+        style={{ lineHeight: 1.5 }}
       >
         {!isUser && message.thinkingSteps && message.thinkingSteps.length > 0 && (
           <div className="mb-2 space-y-1">
@@ -181,7 +182,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
                 animate={{ opacity: 1 }}
                 className="flex items-center gap-1.5 text-xs text-muted-foreground"
               >
-                <Sparkles className="h-3 w-3 shrink-0 text-[#ff9f0a]" />
+                <Sparkles className="h-3 w-3 shrink-0 text-[#f59e0b]" />
                 <span className="italic">{step}</span>
               </motion.div>
             ))}
@@ -191,7 +192,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
                 <span className="italic">Thinking...</span>
               </div>
             )}
-            {message.content && <div className="h-px bg-border my-1.5" />}
+            {message.content && <div className="h-px bg-[#2a2e36] my-1.5" />}
           </div>
         )}
 
@@ -202,12 +203,12 @@ function MessageBubble({ message }: { message: ChatMessage }) {
         )}
 
         {message.isStreaming && message.content && (
-          <span className="inline-block w-1.5 h-4 bg-primary animate-pulse ml-0.5 align-text-bottom rounded-sm" />
+          <span className="inline-block w-1.5 h-4 bg-[#3b82f6] animate-pulse ml-0.5 align-text-bottom rounded-sm" />
         )}
       </div>
 
       {isUser && (
-        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground mt-0.5">
+        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#3b82f6] text-white mt-0.5">
           <User className="h-3.5 w-3.5" />
         </div>
       )}
@@ -236,14 +237,14 @@ export default function AgentChat() {
   };
 
   return (
-    <div className="flex flex-col h-full border border-border rounded-xl bg-card">
+    <div className="flex flex-col h-full rounded-2xl bg-[#1a1d23] shadow-lg shadow-black/5">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-border px-4 py-3">
-        <div className="flex items-center gap-2">
+      <div className="flex items-center justify-between px-5 py-4">
+        <div className="flex items-center gap-2.5">
           <MessageSquare className="h-4 w-4 text-muted-foreground" />
-          <span className="text-sm font-medium text-foreground">Ask the Agent</span>
+          <span className="text-sm font-medium text-foreground">Agent Chat</span>
           {isAgentTyping && (
-            <Badge variant="secondary" className="text-xs">
+            <Badge variant="secondary" className="text-xs rounded-lg border-0">
               <Loader2 className="mr-1 h-3 w-3 animate-spin" />
               Analyzing
             </Badge>
@@ -255,6 +256,7 @@ export default function AgentChat() {
             size="icon-xs"
             onClick={clearChat}
             title="Clear chat"
+            className="text-muted-foreground hover:text-foreground"
           >
             <Trash2 className="h-3.5 w-3.5" />
           </Button>
@@ -262,7 +264,7 @@ export default function AgentChat() {
       </div>
 
       {/* Messages area */}
-      <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto p-4">
+      <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto px-4 pb-4">
         {messages.length === 0 && (
           <div className="flex flex-col items-center justify-center py-8 text-center text-muted-foreground">
             <Bot className="mb-3 h-8 w-8 opacity-20" />
@@ -270,7 +272,7 @@ export default function AgentChat() {
             <p className="text-xs max-w-[260px]">
               Ask follow-up questions about the research. Try{" "}
               <button
-                className="text-primary underline underline-offset-2"
+                className="text-[#3b82f6] underline underline-offset-2"
                 onClick={() => {
                   setInput("What are the key risks?");
                   inputRef.current?.focus();
@@ -280,7 +282,7 @@ export default function AgentChat() {
               </button>{" "}
               or{" "}
               <button
-                className="text-primary underline underline-offset-2"
+                className="text-[#3b82f6] underline underline-offset-2"
                 onClick={() => {
                   setInput("Compare with peers");
                   inputRef.current?.focus();
@@ -302,7 +304,7 @@ export default function AgentChat() {
       {/* Input area */}
       <form
         onSubmit={handleSubmit}
-        className="flex items-center gap-2 border-t border-border px-3 py-2.5"
+        className="flex items-center gap-2 px-4 py-3 border-t border-[rgba(255,255,255,0.04)]"
       >
         <input
           ref={inputRef}
@@ -319,7 +321,7 @@ export default function AgentChat() {
           type="submit"
           size="icon-xs"
           disabled={isAgentTyping || !input.trim()}
-          className="shrink-0"
+          className="shrink-0 rounded-lg"
         >
           <Send className="h-3.5 w-3.5" />
         </Button>

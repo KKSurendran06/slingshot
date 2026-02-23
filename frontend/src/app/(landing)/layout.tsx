@@ -4,7 +4,7 @@ export default function LandingLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="dark bg-[#1c1c1e] min-h-screen">
+    <div className="dark bg-[#0f1115] min-h-screen">
       {children}
     </div>
   );

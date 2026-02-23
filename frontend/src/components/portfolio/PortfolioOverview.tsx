@@ -56,10 +56,10 @@ export default function PortfolioOverview({ metrics }: PortfolioOverviewProps) {
 
   const riskColor =
     metrics.risk_score >= 8
-      ? "text-[#ff453a]"
+      ? "text-[#ef4444]"
       : metrics.risk_score >= 5
-        ? "text-[#ff9f0a]"
-        : "text-[#30d158]";
+        ? "text-[#f59e0b]"
+        : "text-[#22c55e]";
 
   const riskLabel =
     metrics.risk_score >= 8
@@ -69,7 +69,7 @@ export default function PortfolioOverview({ metrics }: PortfolioOverviewProps) {
         : "Low Risk";
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
       {/* Total Value */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -77,15 +77,15 @@ export default function PortfolioOverview({ metrics }: PortfolioOverviewProps) {
         transition={{ delay: 0, duration: 0.2 }}
       >
         <Card>
-          <CardContent className="pt-4 pb-4">
-            <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
+          <CardContent className="pt-5 pb-5">
+            <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
               <IndianRupee className="h-3.5 w-3.5" />
               Total Value
             </div>
             <div className="text-2xl font-bold font-mono">
               {formatIndianNumber(animatedValue)}
             </div>
-            <div className="text-xs text-muted-foreground mt-1">
+            <div className="text-xs text-muted-foreground mt-1.5">
               Invested: {formatIndianNumber(metrics.total_invested)}
             </div>
           </CardContent>
@@ -99,8 +99,8 @@ export default function PortfolioOverview({ metrics }: PortfolioOverviewProps) {
         transition={{ delay: 0.05, duration: 0.2 }}
       >
         <Card>
-          <CardContent className="pt-4 pb-4">
-            <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
+          <CardContent className="pt-5 pb-5">
+            <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
               <TrendingUp className="h-3.5 w-3.5" />
               Total Return
             </div>
@@ -108,14 +108,14 @@ export default function PortfolioOverview({ metrics }: PortfolioOverviewProps) {
               className={cn(
                 "text-2xl font-bold font-mono",
                 metrics.total_return_pct >= 0
-                  ? "text-[#30d158]"
-                  : "text-[#ff453a]"
+                  ? "text-[#22c55e]"
+                  : "text-[#ef4444]"
               )}
             >
               {metrics.total_return_pct >= 0 ? "+" : ""}
               {(animatedReturn / 10).toFixed(1)}%
             </div>
-            <div className="text-xs text-muted-foreground mt-1">
+            <div className="text-xs text-muted-foreground mt-1.5">
               P&L: {metrics.total_return_pct >= 0 ? "+" : ""}
               {formatIndianNumber(metrics.total_value - metrics.total_invested)}
             </div>
@@ -130,15 +130,15 @@ export default function PortfolioOverview({ metrics }: PortfolioOverviewProps) {
         transition={{ delay: 0.1, duration: 0.2 }}
       >
         <Card>
-          <CardContent className="pt-4 pb-4">
-            <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
+          <CardContent className="pt-5 pb-5">
+            <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
               <ShieldAlert className="h-3.5 w-3.5" />
               Risk Score
             </div>
             <div className={cn("text-2xl font-bold font-mono", riskColor)}>
               {(animatedRisk / 10).toFixed(1)}/10
             </div>
-            <div className="text-xs text-muted-foreground mt-1">
+            <div className="text-xs text-muted-foreground mt-1.5">
               Beta: {metrics.portfolio_beta} &middot; {riskLabel}
             </div>
           </CardContent>

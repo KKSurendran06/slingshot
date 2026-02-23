@@ -12,7 +12,7 @@ import Sidebar from "./Sidebar";
 
 export default function Header() {
   return (
-    <header className="flex h-14 items-center gap-4 border-b border-border bg-background px-4 md:hidden">
+    <header className="flex h-14 items-center gap-4 border-b border-[rgba(255,255,255,0.06)] bg-[#151821] px-4 md:hidden">
       {/* Mobile menu */}
       <Sheet>
         <SheetTrigger asChild>
@@ -20,7 +20,7 @@ export default function Header() {
             <Menu className="h-5 w-5" />
           </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="w-60 p-0 bg-background border-border" showCloseButton={false}>
+        <SheetContent side="left" className="w-60 p-0 bg-[#151821] border-[rgba(255,255,255,0.06)]" showCloseButton={false}>
           <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
           <Sidebar />
         </SheetContent>

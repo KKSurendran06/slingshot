@@ -100,11 +100,11 @@ export default function FeatureCards() {
           <motion.div
             key={feature.title}
             variants={cardVariants}
-            className="group relative rounded-xl bg-card border border-border p-8 transition-colors duration-200 hover:bg-muted cursor-default"
+            className="group relative rounded-2xl bg-[#1a1d23] p-8 transition-colors duration-200 hover:bg-[#20242c] cursor-default shadow-lg"
           >
             {/* Icon */}
             <div className="mb-6">
-              <div className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-secondary border border-border">
+              <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-[#20242c] shadow-md">
                 <feature.icon className={`h-5 w-5 ${feature.iconColor}`} />
               </div>
             </div>
@@ -128,9 +128,9 @@ export default function FeatureCards() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.3, delay: 0.15 }}
-        className="max-w-3xl mx-auto mt-20 rounded-xl bg-card border border-border p-6"
+        className="max-w-3xl mx-auto mt-20 rounded-2xl bg-[#1a1d23] p-6 shadow-lg"
       >
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-0 sm:divide-x sm:divide-border">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-0 sm:divide-x sm:divide-[rgba(255,255,255,0.06)]">
           {metrics.map((m) => (
             <div key={m.label} className="flex items-center gap-3 sm:justify-center sm:px-4">
               <m.icon className="h-4 w-4 text-muted-foreground shrink-0" />

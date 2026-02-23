@@ -19,22 +19,22 @@ interface CompanyImpactGridProps {
 const directionConfig = {
   positive: {
     icon: TrendingUp,
-    color: "text-[#30d158]",
-    borderColor: "border-l-[#30d158]",
-    badgeColor: "bg-[#30d158]/10 text-[#30d158]",
+    color: "text-[#22c55e]",
+    borderColor: "border-l-[#22c55e]",
+    badgeColor: "bg-[#22c55e]/10 text-[#22c55e]",
     label: "Positive",
   },
   negative: {
     icon: TrendingDown,
-    color: "text-[#ff453a]",
-    borderColor: "border-l-[#ff453a]",
-    badgeColor: "bg-[#ff453a]/10 text-[#ff453a]",
+    color: "text-[#ef4444]",
+    borderColor: "border-l-[#ef4444]",
+    badgeColor: "bg-[#ef4444]/10 text-[#ef4444]",
     label: "Negative",
   },
   neutral: {
     icon: Minus,
     color: "text-muted-foreground",
-    borderColor: "border-l-border",
+    borderColor: "border-l-[#20242c]",
     badgeColor: "bg-secondary text-muted-foreground",
     label: "Neutral",
   },
@@ -78,7 +78,7 @@ export default function CompanyImpactGrid({
               >
                 <div
                   className={cn(
-                    "rounded-lg border border-border border-l-2 bg-card p-3 h-full flex flex-col min-w-0",
+                    "rounded-xl border-l-2 bg-[#20242c] p-3 h-full flex flex-col min-w-0 transition-all duration-200",
                     config.borderColor
                   )}
                 >
@@ -89,7 +89,7 @@ export default function CompanyImpactGrid({
                     </span>
                     <div className="flex items-center gap-1 shrink-0 ml-auto">
                       <Icon className={cn("h-3.5 w-3.5", config.color)} />
-                      <Badge className={cn("text-[10px] px-1.5 py-0 whitespace-nowrap", config.badgeColor)}>
+                      <Badge className={cn("text-[10px] px-1.5 py-0 whitespace-nowrap border-0 rounded-lg", config.badgeColor)}>
                         {magnitudeLabels[company.impact_magnitude]}
                       </Badge>
                     </div>
@@ -106,11 +106,11 @@ export default function CompanyImpactGrid({
                   </p>
 
                   {/* Confidence */}
-                  <div className="mt-2 pt-2 border-t border-border flex items-center justify-between gap-2 min-w-0">
+                  <div className="mt-2 pt-2 border-t border-[rgba(255,255,255,0.04)] flex items-center justify-between gap-2 min-w-0">
                     <span className="text-[10px] text-muted-foreground truncate min-w-0">
                       {company.exposure_type.split(" - ")[0]}
                     </span>
-                    <Badge variant="outline" className="text-[10px] px-1.5 py-0 shrink-0">
+                    <Badge variant="secondary" className="text-[10px] px-1.5 py-0 shrink-0 border-0 rounded-lg">
                       {Math.round(company.confidence * 100)}%
                     </Badge>
                   </div>

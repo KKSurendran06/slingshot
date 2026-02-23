@@ -46,8 +46,11 @@ export default function MacroReport({
   if (!hasAnyContent) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center text-muted-foreground">
-        <Globe className="mb-3 h-10 w-10 opacity-30" />
-        <p className="text-sm">
+        <div className="rounded-2xl bg-[#1a1d23] p-6 mb-6">
+          <Globe className="h-10 w-10 opacity-30" />
+        </div>
+        <p className="text-sm font-medium text-foreground mb-2">Macro Analysis</p>
+        <p className="text-xs max-w-[260px]">
           The macro analysis report will appear here when analysis is complete.
         </p>
       </div>
@@ -55,7 +58,7 @@ export default function MacroReport({
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {/* Visual widgets */}
       <CausalChain links={causalChain} />
       <CompanyImpactGrid companies={companies} />

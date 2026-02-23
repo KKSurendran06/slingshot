@@ -50,8 +50,11 @@ export default function PortfolioReport({
   if (!hasAnyContent) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center text-muted-foreground">
-        <Briefcase className="mb-3 h-10 w-10 opacity-30" />
-        <p className="text-sm">
+        <div className="rounded-2xl bg-[#1a1d23] p-6 mb-6">
+          <Briefcase className="h-10 w-10 opacity-30" />
+        </div>
+        <p className="text-sm font-medium text-foreground mb-2">Portfolio Analysis</p>
+        <p className="text-xs max-w-[260px]">
           Click &quot;Analyze Portfolio&quot; to see the AI-powered audit,
           stress testing, and rebalancing recommendations.
         </p>
@@ -60,13 +63,13 @@ export default function PortfolioReport({
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {/* Overview stat cards */}
       <PortfolioOverview metrics={metrics} />
 
       {/* Holdings table + Sector chart side by side */}
       {(holdings.length > 0 || sectorAllocation.length > 0) && (
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
           <div className="lg:col-span-3">
             <HoldingsTable holdings={holdings} />
           </div>

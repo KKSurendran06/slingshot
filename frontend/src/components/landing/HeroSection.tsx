@@ -16,7 +16,7 @@ export default function HeroSection() {
           transition={{ duration: 0.4, delay: 0.2 }}
           className="inline-flex items-center gap-2 mb-8"
         >
-          <span className="rounded-full bg-secondary border border-border px-4 py-1.5 text-xs font-medium tracking-wide text-muted-foreground">
+          <span className="rounded-full bg-[#1a1d23] px-4 py-1.5 text-xs font-medium tracking-wide text-muted-foreground shadow-lg">
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#30d158] mr-2" />
             Launching Tomorrow
           </span>
@@ -53,14 +53,14 @@ export default function HeroSection() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <Link href="/research">
-            <button className="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-sm font-semibold text-white bg-primary hover:bg-primary/90 transition-colors duration-200">
+            <button className="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-sm font-semibold text-white bg-primary hover:bg-primary/90 transition-colors duration-200 shadow-lg shadow-primary/20">
               <span>Get Started</span>
               <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
             </button>
           </Link>
 
           <Link href="#preview">
-            <button className="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-sm font-medium text-muted-foreground bg-secondary border border-border hover:bg-muted hover:text-foreground transition-colors duration-200">
+            <button className="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-sm font-medium text-muted-foreground bg-[#1a1d23] hover:bg-[#20242c] hover:text-foreground transition-colors duration-200 shadow-lg">
               See it in action
             </button>
           </Link>

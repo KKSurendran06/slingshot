@@ -67,7 +67,7 @@ export default function MacroPage() {
   return (
     <div className="flex flex-col h-full">
       {/* Search bar */}
-      <div className="border-b border-border px-6 py-4">
+      <div className="px-6 py-4">
         <div className="mx-auto max-w-4xl">
           <SearchBar
             onSearch={handleSearch}
@@ -77,10 +77,10 @@ export default function MacroPage() {
         </div>
       </div>
 
-      {/* Content area: Thought Log + Report */}
-      <div className="flex-1 overflow-hidden grid grid-cols-1 lg:grid-cols-5 gap-0">
+      {/* Content area: 2-column grid */}
+      <div className="flex-1 overflow-hidden grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-0">
         {/* Thought Log — left panel */}
-        <div className="lg:col-span-2 border-r border-border overflow-hidden p-4">
+        <div className="overflow-hidden p-4 pt-0">
           <ThoughtLog
             thoughts={macro.thoughts}
             status={macro.currentStatus}
@@ -88,7 +88,7 @@ export default function MacroPage() {
         </div>
 
         {/* Macro Report — right panel */}
-        <div className="lg:col-span-3 overflow-auto p-6">
+        <div className="overflow-auto px-8 py-4">
           <MacroReport
             causalChain={macro.causalChain}
             companies={macro.companies}

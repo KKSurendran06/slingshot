@@ -72,12 +72,14 @@ export default function PortfolioPage() {
   return (
     <div className="flex flex-col h-full">
       {/* Action bar */}
-      <div className="border-b border-border px-6 py-4">
+      <div className="px-6 py-4">
         <div className="mx-auto max-w-4xl flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Briefcase className="h-5 w-5 text-muted-foreground" />
+            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#20242c]">
+              <Briefcase className="h-4 w-4 text-muted-foreground" />
+            </div>
             <div>
-              <h2 className="text-sm font-semibold text-foreground">
+              <h2 className="text-sm font-medium text-foreground">
                 {demoPortfolio.name}
               </h2>
               <p className="text-xs text-muted-foreground">
@@ -90,6 +92,7 @@ export default function PortfolioPage() {
             onClick={handleAnalyze}
             disabled={portfolio.isLoading}
             size="lg"
+            className="rounded-xl"
           >
             {portfolio.isLoading ? (
               <>
@@ -103,10 +106,10 @@ export default function PortfolioPage() {
         </div>
       </div>
 
-      {/* Content area: Thought Log + Report */}
-      <div className="flex-1 overflow-hidden grid grid-cols-1 lg:grid-cols-5 gap-0">
+      {/* Content area: 2-column grid */}
+      <div className="flex-1 overflow-hidden grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-0">
         {/* Thought Log — left panel */}
-        <div className="lg:col-span-2 border-r border-border overflow-hidden p-4">
+        <div className="overflow-hidden p-4 pt-0">
           <ThoughtLog
             thoughts={portfolio.thoughts}
             status={portfolio.currentStatus}
@@ -114,7 +117,7 @@ export default function PortfolioPage() {
         </div>
 
         {/* Portfolio Report — right panel */}
-        <div className="lg:col-span-3 overflow-auto p-6">
+        <div className="overflow-auto px-8 py-4">
           <PortfolioReport
             holdings={portfolio.portfolio?.holdings ?? []}
             metrics={portfolio.metrics}

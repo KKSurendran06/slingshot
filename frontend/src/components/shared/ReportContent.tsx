@@ -56,11 +56,11 @@ export default function ReportContent({
           return (
             <Popover key={i}>
               <PopoverTrigger asChild>
-                <button className="inline-flex items-center rounded bg-primary/10 px-1 py-0.5 text-xs font-medium text-primary hover:bg-primary/20 transition-colors mx-0.5">
+                <button className="inline-flex items-center rounded-md bg-[#3b82f6]/15 px-1.5 py-0.5 text-xs font-medium text-[#3b82f6] hover:bg-[#3b82f6]/25 transition-colors duration-200 mx-0.5">
                   [{match[1]}]
                 </button>
               </PopoverTrigger>
-              <PopoverContent className="w-72 text-sm" align="start">
+              <PopoverContent className="w-72 text-sm rounded-xl bg-[#1a1d23] border-[rgba(255,255,255,0.06)]" align="start">
                 <div className="flex items-start gap-2">
                   <Icon className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
                   <div>
@@ -75,7 +75,7 @@ export default function ReportContent({
                         href={cite.source_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mt-2 inline-flex items-center gap-1 text-xs text-primary hover:underline"
+                        className="mt-2 inline-flex items-center gap-1 text-xs text-[#3b82f6] hover:underline"
                       >
                         View source
                         <ExternalLink className="h-3 w-3" />

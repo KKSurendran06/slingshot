@@ -41,9 +41,9 @@ export default function CollapsibleReport({
       <button
         onClick={() => setIsExpanded(!isExpanded)}
         className={cn(
-          "w-full flex items-center justify-between px-4 py-3 rounded-lg border border-border transition-colors",
-          "bg-secondary hover:bg-muted",
-          isExpanded && "rounded-b-none border-b-0"
+          "w-full flex items-center justify-between px-4 py-3 rounded-xl transition-colors duration-200",
+          "bg-[#1a1d23] hover:bg-[#20242c]",
+          isExpanded && "rounded-b-none"
         )}
       >
         <div className="flex items-center gap-2 text-sm font-medium">
@@ -73,7 +73,7 @@ export default function CollapsibleReport({
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="overflow-hidden border border-border border-t-0 rounded-b-lg"
+            className="overflow-hidden rounded-b-xl bg-[#1a1d23]"
           >
             <div className="p-4 space-y-4">
               {/* Detailed Analysis */}
@@ -90,7 +90,7 @@ export default function CollapsibleReport({
                           e.stopPropagation();
                           setShowDetailedAnalysis(!showDetailedAnalysis);
                         }}
-                        className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+                        className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors duration-200"
                       >
                         {showDetailedAnalysis ? "Collapse" : "Expand"}
                         <motion.div
@@ -144,9 +144,9 @@ export default function CollapsibleReport({
                         return (
                           <div
                             key={i}
-                            className="flex items-start gap-3 rounded-lg border border-border p-3 text-sm"
+                            className="flex items-start gap-3 rounded-xl bg-[#151821] p-3 text-sm transition-colors duration-200 hover:bg-[#1a1d23]"
                           >
-                            <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded bg-muted">
+                            <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#20242c]">
                               <Icon className="h-3.5 w-3.5 text-muted-foreground" />
                             </div>
                             <div className="flex-1 min-w-0">
@@ -169,7 +169,7 @@ export default function CollapsibleReport({
                                 href={cite.source_url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-muted-foreground hover:text-foreground"
+                                className="text-muted-foreground hover:text-foreground transition-colors duration-200"
                               >
                                 <ExternalLink className="h-3.5 w-3.5" />
                               </a>

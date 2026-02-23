@@ -23,27 +23,36 @@ interface ThoughtLogProps {
 
 const stepTypeConfig: Record<
   string,
-  { icon: React.ElementType; color: string; label: string }
+  { icon: React.ElementType; color: string; bgColor: string; label: string }
 > = {
   planning: {
     icon: BrainCircuit,
-    color: "text-[#bf5af2]",
+    color: "text-[#a855f7]",
+    bgColor: "bg-[#a855f7]/10",
     label: "Planning",
   },
-  researching: { icon: Search, color: "text-[#0a84ff]", label: "Researching" },
+  researching: {
+    icon: Search,
+    color: "text-[#3b82f6]",
+    bgColor: "bg-[#3b82f6]/10",
+    label: "Researching",
+  },
   analyzing: {
     icon: BarChart3,
-    color: "text-[#ff9f0a]",
+    color: "text-[#f59e0b]",
+    bgColor: "bg-[#f59e0b]/10",
     label: "Analyzing",
   },
   reflecting: {
     icon: MessageSquare,
-    color: "text-[#64d2ff]",
+    color: "text-[#06b6d4]",
+    bgColor: "bg-[#06b6d4]/10",
     label: "Reflecting",
   },
   reporting: {
     icon: FileText,
-    color: "text-[#30d158]",
+    color: "text-[#22c55e]",
+    bgColor: "bg-[#22c55e]/10",
     label: "Reporting",
   },
 };
@@ -52,12 +61,12 @@ const statusConfig: Record<
   string,
   { icon: React.ElementType; className: string; label: string }
 > = {
-  planning: { icon: BrainCircuit, className: "bg-[#bf5af2]/10 text-[#bf5af2]", label: "Planning" },
-  researching: { icon: Search, className: "bg-[#0a84ff]/10 text-[#0a84ff]", label: "Researching" },
-  analyzing: { icon: BarChart3, className: "bg-[#ff9f0a]/10 text-[#ff9f0a]", label: "Analyzing" },
-  reflecting: { icon: MessageSquare, className: "bg-[#64d2ff]/10 text-[#64d2ff]", label: "Reflecting" },
-  reporting: { icon: FileText, className: "bg-[#30d158]/10 text-[#30d158]", label: "Reporting" },
-  complete: { icon: CheckCircle2, className: "bg-[#30d158]/10 text-[#30d158]", label: "Complete" },
+  planning: { icon: BrainCircuit, className: "bg-[#a855f7]/10 text-[#a855f7]", label: "Planning" },
+  researching: { icon: Search, className: "bg-[#3b82f6]/10 text-[#3b82f6]", label: "Researching" },
+  analyzing: { icon: BarChart3, className: "bg-[#f59e0b]/10 text-[#f59e0b]", label: "Analyzing" },
+  reflecting: { icon: MessageSquare, className: "bg-[#06b6d4]/10 text-[#06b6d4]", label: "Reflecting" },
+  reporting: { icon: FileText, className: "bg-[#22c55e]/10 text-[#22c55e]", label: "Reporting" },
+  complete: { icon: CheckCircle2, className: "bg-[#22c55e]/10 text-[#22c55e]", label: "Complete" },
   error: { icon: AlertCircle, className: "bg-destructive/10 text-destructive", label: "Error" },
 };
 
@@ -74,17 +83,17 @@ export default function ThoughtLog({ thoughts, status }: ThoughtLogProps) {
   const currentStatus = status ? statusConfig[status] : null;
 
   return (
-    <div className="flex flex-col h-full border border-border rounded-xl bg-card">
+    <div className="flex flex-col h-full rounded-2xl bg-[#1a1d23] shadow-lg shadow-black/5">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-border px-4 py-3">
-        <div className="flex items-center gap-2">
+      <div className="flex items-center justify-between px-5 py-4">
+        <div className="flex items-center gap-2.5">
           <BrainCircuit className="h-4 w-4 text-muted-foreground" />
-          <span className="text-sm font-medium text-foreground">Reasoning Trace</span>
+          <span className="text-sm font-medium text-foreground">Reasoning</span>
         </div>
         {currentStatus && (
           <Badge
             variant="secondary"
-            className={cn("text-xs", currentStatus.className)}
+            className={cn("text-xs rounded-lg border-0", currentStatus.className)}
           >
             {status !== "complete" && status !== "error" && (
               <Loader2 className="mr-1 h-3 w-3 animate-spin" />
@@ -99,7 +108,7 @@ export default function ThoughtLog({ thoughts, status }: ThoughtLogProps) {
       </div>
 
       {/* Thought steps */}
-      <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto p-4">
+      <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto px-5 pb-4">
         {thoughts.length === 0 && !status && (
           <div className="flex flex-col items-center justify-center py-12 text-center text-muted-foreground">
             <BrainCircuit className="mb-3 h-8 w-8 opacity-20" />
@@ -114,9 +123,12 @@ export default function ThoughtLog({ thoughts, status }: ThoughtLogProps) {
             const config = stepTypeConfig[step.step_type] || {
               icon: BrainCircuit,
               color: "text-muted-foreground",
+              bgColor: "bg-muted",
               label: step.step_type,
             };
             const Icon = config.icon;
+            const isActive = status !== "complete" && i === thoughts.length - 1;
+            const isDisabled = status === "complete" && i < thoughts.length - 1;
 
             return (
               <motion.div
@@ -125,13 +137,14 @@ export default function ThoughtLog({ thoughts, status }: ThoughtLogProps) {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="mb-4 last:mb-0"
+                className={cn("mb-4 last:mb-0", isDisabled && "opacity-50")}
               >
                 {/* Step header */}
                 <div className="flex items-start gap-3">
                   <div
                     className={cn(
-                      "mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-muted",
+                      "mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full",
+                      config.bgColor,
                       config.color
                     )}
                   >
@@ -139,13 +152,14 @@ export default function ThoughtLog({ thoughts, status }: ThoughtLogProps) {
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-medium text-foreground">
+                      <span className={cn(
+                        "text-sm font-medium",
+                        isActive ? "text-foreground" : "text-foreground/80"
+                      )}>
                         {step.title}
                       </span>
-                      {step.confidence != null && (
-                        <Badge variant="outline" className="text-xs">
-                          {Math.round(step.confidence * 100)}%
-                        </Badge>
+                      {isActive && (
+                        <div className="h-1.5 w-1.5 rounded-full bg-[#3b82f6] shrink-0" />
                       )}
                     </div>
                     {step.content && (
@@ -160,7 +174,7 @@ export default function ThoughtLog({ thoughts, status }: ThoughtLogProps) {
                           <Badge
                             key={j}
                             variant="secondary"
-                            className="text-xs"
+                            className="text-xs rounded-lg border-0"
                           >
                             {exec.tool_name}
                             {exec.execution_time_ms && (
@@ -177,7 +191,7 @@ export default function ThoughtLog({ thoughts, status }: ThoughtLogProps) {
 
                 {/* Connector line */}
                 {i < thoughts.length - 1 && (
-                  <div className="ml-3.5 mt-1 mb-1 h-4 w-px bg-border" />
+                  <div className="ml-3.5 mt-1 mb-1 h-4 w-px bg-[#20242c]" />
                 )}
               </motion.div>
             );

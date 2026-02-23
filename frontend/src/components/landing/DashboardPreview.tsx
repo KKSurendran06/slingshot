@@ -88,16 +88,16 @@ export default function DashboardPreview() {
       >
         <div className="relative">
           {/* Dashboard container */}
-          <div className="relative rounded-xl bg-card border border-border overflow-hidden shadow-lg shadow-black/20">
+          <div className="relative rounded-2xl bg-[#151821] overflow-hidden shadow-2xl shadow-black/30">
             {/* Title bar */}
-            <div className="flex items-center gap-2 px-5 py-3.5 border-b border-border bg-secondary">
+            <div className="flex items-center gap-2 px-5 py-3.5 border-b border-[rgba(255,255,255,0.06)] bg-[#1a1d23]">
               <div className="flex gap-1.5">
                 <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
                 <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
                 <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
               </div>
               <div className="flex-1 flex justify-center">
-                <div className="bg-muted rounded-md px-24 py-1 border border-border">
+                <div className="bg-[#20242c] rounded-lg px-24 py-1">
                   <span className="text-[10px] text-muted-foreground font-mono">
                     slingshot.ai/research
                   </span>
@@ -109,7 +109,7 @@ export default function DashboardPreview() {
             {/* Dashboard content — 3-column layout */}
             <div className="grid grid-cols-12 min-h-[420px]">
               {/* Left: Thought log */}
-              <div className="col-span-3 border-r border-border p-4">
+              <div className="col-span-3 border-r border-[rgba(255,255,255,0.06)] p-4">
                 <div className="flex items-center gap-2 mb-4">
                   <Brain className="h-3.5 w-3.5 text-muted-foreground" />
                   <span className="text-[11px] font-medium text-muted-foreground">
@@ -128,12 +128,12 @@ export default function DashboardPreview() {
                       className="flex items-center gap-2.5"
                     >
                       <div
-                        className={`w-5 h-5 rounded-md flex items-center justify-center shrink-0 ${
+                        className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${
                           t.status === "done"
                             ? "bg-[#30d158]/10"
                             : t.status === "active"
-                            ? "bg-primary/10"
-                            : "bg-secondary"
+                            ? "bg-[#3b82f6]/15"
+                            : "bg-[#20242c]"
                         }`}
                       >
                         <t.icon
@@ -141,7 +141,7 @@ export default function DashboardPreview() {
                             t.status === "done"
                               ? "text-[#30d158]"
                               : t.status === "active"
-                              ? "text-primary"
+                              ? "text-[#3b82f6]"
                               : "text-muted-foreground"
                           }`}
                         />
@@ -159,7 +159,7 @@ export default function DashboardPreview() {
                       </span>
                       {t.status === "active" && (
                         <motion.div
-                          className="w-1 h-1 rounded-full bg-primary ml-auto"
+                          className="w-1 h-1 rounded-full bg-[#3b82f6] ml-auto"
                           animate={{ opacity: [1, 0.3, 1] }}
                           transition={{ duration: 1.5, repeat: Infinity }}
                         />
@@ -170,7 +170,7 @@ export default function DashboardPreview() {
               </div>
 
               {/* Center: Report */}
-              <div className="col-span-5 border-r border-border p-5">
+              <div className="col-span-5 border-r border-[rgba(255,255,255,0.06)] p-5">
                 <div className="flex items-center gap-2 mb-5">
                   <FileText className="h-3.5 w-3.5 text-muted-foreground" />
                   <span className="text-[11px] font-medium text-muted-foreground">
@@ -186,7 +186,7 @@ export default function DashboardPreview() {
                       whileInView={{ opacity: 1 }}
                       viewport={{ once: true }}
                       transition={{ delay: 1, duration: 0.3 }}
-                      className="h-4 w-48 rounded bg-secondary mb-3"
+                      className="h-4 w-48 rounded bg-[#20242c] mb-3"
                     />
                     <div className="space-y-2">
                       {reportLines.map((line, i) => (
@@ -203,8 +203,8 @@ export default function DashboardPreview() {
                           <div
                             className={`h-2 rounded-full ${
                               line.highlight
-                                ? "bg-primary/15"
-                                : "bg-secondary"
+                                ? "bg-[#3b82f6]/15"
+                                : "bg-[#20242c]"
                             }`}
                             style={{ width: line.width }}
                           />
@@ -228,7 +228,7 @@ export default function DashboardPreview() {
                     ].map((m) => (
                       <div
                         key={m.label}
-                        className="rounded-lg bg-secondary border border-border p-2.5 text-center"
+                        className="rounded-xl bg-[#1a1d23] p-2.5 text-center shadow-md"
                       >
                         <p className="text-[10px] text-muted-foreground mb-0.5">{m.label}</p>
                         <p className={`text-sm font-semibold ${m.color}`}>{m.value}</p>
@@ -256,7 +256,7 @@ export default function DashboardPreview() {
                     transition={{ delay: 1.3, duration: 0.3 }}
                     className="ml-auto max-w-[80%]"
                   >
-                    <div className="rounded-xl rounded-br-sm bg-primary/10 border border-primary/20 px-3 py-2">
+                    <div className="rounded-2xl rounded-br-sm bg-[#3b82f6]/15 px-3 py-2">
                       <p className="text-[11px] text-foreground">
                         How does HDFC compare to ICICI on asset quality?
                       </p>
@@ -270,7 +270,7 @@ export default function DashboardPreview() {
                     transition={{ delay: 1.6, duration: 0.3 }}
                     className="max-w-[85%]"
                   >
-                    <div className="rounded-xl rounded-bl-sm bg-muted border border-border px-3 py-2">
+                    <div className="rounded-2xl rounded-bl-sm bg-[#20242c] px-3 py-2">
                       <p className="text-[11px] text-muted-foreground">
                         HDFC&apos;s GNPA at 1.24% edges out ICICI&apos;s 2.30%.
                         Net NPA gap is even wider at 0.33% vs 0.44%...
@@ -285,7 +285,7 @@ export default function DashboardPreview() {
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: 1.8, duration: 0.3 }}
-                  className="mt-4 rounded-lg bg-secondary border border-border p-3"
+                  className="mt-4 rounded-xl bg-[#1a1d23] p-3 shadow-md"
                 >
                   <div className="flex items-center gap-1.5 mb-2.5">
                     <BarChart3 className="h-3 w-3 text-muted-foreground" />

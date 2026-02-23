@@ -35,9 +35,9 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden md:flex w-60 flex-col border-r border-border bg-background">
+    <aside className="hidden md:flex w-60 flex-col bg-[#151821]">
       {/* Logo */}
-      <div className="flex h-14 items-center gap-2.5 border-b border-border px-5">
+      <div className="flex h-14 items-center gap-2.5 border-b border-[rgba(255,255,255,0.06)] px-5">
         <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary">
           <Activity className="h-3.5 w-3.5 text-primary-foreground" />
         </div>
@@ -57,17 +57,17 @@ export default function Sidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors duration-200",
+                "flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition-colors duration-200",
                 isActive
-                  ? "bg-accent text-foreground"
-                  : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                  ? "bg-[#20242c] text-foreground"
+                  : "text-muted-foreground hover:bg-[#1a1d23] hover:text-foreground"
               )}
             >
               <div
                 className={cn(
-                  "flex h-7 w-7 items-center justify-center rounded-md transition-colors duration-200",
+                  "flex h-7 w-7 items-center justify-center rounded-full transition-colors duration-200",
                   isActive
-                    ? "bg-primary/10 text-primary"
+                    ? "bg-[#3b82f6]/15 text-[#3b82f6]"
                     : "text-muted-foreground"
                 )}
               >
@@ -90,8 +90,8 @@ export default function Sidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="border-t border-border p-3">
-        <div className="rounded-lg bg-muted px-3 py-2.5 text-xs text-muted-foreground">
+      <div className="border-t border-[rgba(255,255,255,0.06)] p-3">
+        <div className="rounded-xl bg-[#1a1d23] px-3 py-2.5 text-xs text-muted-foreground">
           <span className="font-medium text-foreground/60">Slingshot v0.1</span>
           <br />
           Agentic Research for Indian Markets

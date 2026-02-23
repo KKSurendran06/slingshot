@@ -52,7 +52,7 @@ export default function CausalChain({ links }: CausalChainProps) {
                 transition={{ delay: i * 0.15, duration: 0.2 }}
               >
                 <div className="flex flex-col items-center">
-                  <div className="rounded-lg border border-border bg-secondary px-3 py-2 text-center min-w-[120px] max-w-[160px]">
+                  <div className="rounded-xl bg-[#20242c] px-3 py-2 text-center min-w-[120px] max-w-[160px] shadow-sm shadow-black/10">
                     <span className="text-xs font-medium leading-tight">
                       {node}
                     </span>
@@ -60,8 +60,8 @@ export default function CausalChain({ links }: CausalChainProps) {
                   {/* Confidence badge for the link FROM this node */}
                   {i < links.length && (
                     <Badge
-                      variant="outline"
-                      className="mt-1 text-[10px] px-1.5 py-0"
+                      variant="secondary"
+                      className="mt-1 text-[10px] px-1.5 py-0 border-0 rounded-lg"
                     >
                       {Math.round(links[i].confidence * 100)}%
                     </Badge>
@@ -89,7 +89,7 @@ export default function CausalChain({ links }: CausalChainProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: i * 0.1, duration: 0.2 }}
-              className="rounded-lg border border-border p-3"
+              className="rounded-xl bg-[#20242c] p-3"
             >
               <div className="flex items-center gap-2 text-xs">
                 <span className="font-medium text-foreground">

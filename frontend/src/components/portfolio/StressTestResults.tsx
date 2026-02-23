@@ -11,10 +11,10 @@ interface StressTestResultsProps {
 }
 
 const severityConfig = {
-  low: { barColor: "bg-[#30d158]", textColor: "text-[#30d158]" },
-  moderate: { barColor: "bg-[#ff9f0a]", textColor: "text-[#ff9f0a]" },
-  high: { barColor: "bg-[#ff6723]", textColor: "text-[#ff6723]" },
-  severe: { barColor: "bg-[#ff453a]", textColor: "text-[#ff453a]" },
+  low: { barColor: "bg-[#22c55e]", textColor: "text-[#22c55e]" },
+  moderate: { barColor: "bg-[#f59e0b]", textColor: "text-[#f59e0b]" },
+  high: { barColor: "bg-[#f97316]", textColor: "text-[#f97316]" },
+  severe: { barColor: "bg-[#ef4444]", textColor: "text-[#ef4444]" },
 };
 
 /**
@@ -66,7 +66,7 @@ export default function StressTestResults({
                   <span
                     className={cn(
                       "text-sm font-bold font-mono",
-                      isPositive ? "text-[#30d158]" : config.textColor
+                      isPositive ? "text-[#22c55e]" : config.textColor
                     )}
                   >
                     {isPositive ? "+" : ""}
@@ -75,11 +75,11 @@ export default function StressTestResults({
                 </div>
 
                 {/* Animated bar */}
-                <div className="h-2 rounded-full bg-secondary overflow-hidden">
+                <div className="h-2 rounded-full bg-[#20242c] overflow-hidden">
                   <motion.div
                     className={cn(
                       "h-full rounded-full",
-                      isPositive ? "bg-[#30d158]" : config.barColor
+                      isPositive ? "bg-[#22c55e]" : config.barColor
                     )}
                     initial={{ width: 0 }}
                     animate={{ width: `${barWidth}%` }}
