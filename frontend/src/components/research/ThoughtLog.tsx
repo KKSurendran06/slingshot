@@ -83,17 +83,17 @@ export default function ThoughtLog({ thoughts, status }: ThoughtLogProps) {
   const currentStatus = status ? statusConfig[status] : null;
 
   return (
-    <div className="flex flex-col h-full rounded-2xl bg-[#1a1d23] shadow-lg shadow-black/5">
+    <div className="flex flex-col h-full rounded-2xl bg-[#1a1d23] shadow-lg shadow-black/5 overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between px-5 py-4">
-        <div className="flex items-center gap-2.5">
-          <BrainCircuit className="h-4 w-4 text-muted-foreground" />
-          <span className="text-sm font-medium text-foreground">Reasoning</span>
+      <div className="flex items-center justify-between px-4 py-4 shrink-0">
+        <div className="flex items-center gap-2 min-w-0">
+          <BrainCircuit className="h-4 w-4 text-muted-foreground shrink-0" />
+          <span className="text-sm font-medium text-foreground truncate">Reasoning</span>
         </div>
         {currentStatus && (
           <Badge
             variant="secondary"
-            className={cn("text-xs rounded-lg border-0", currentStatus.className)}
+            className={cn("text-[10px] rounded-lg border-0 shrink-0 whitespace-nowrap", currentStatus.className)}
           >
             {status !== "complete" && status !== "error" && (
               <Loader2 className="mr-1 h-3 w-3 animate-spin" />
@@ -108,11 +108,11 @@ export default function ThoughtLog({ thoughts, status }: ThoughtLogProps) {
       </div>
 
       {/* Thought steps */}
-      <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto px-5 pb-4">
+      <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden px-4 pb-4">
         {thoughts.length === 0 && !status && (
           <div className="flex flex-col items-center justify-center py-12 text-center text-muted-foreground">
             <BrainCircuit className="mb-3 h-8 w-8 opacity-20" />
-            <p className="text-sm">
+            <p className="text-xs leading-relaxed">
               Start a research query to see the reasoning trace here.
             </p>
           </div>
@@ -140,20 +140,20 @@ export default function ThoughtLog({ thoughts, status }: ThoughtLogProps) {
                 className={cn("mb-4 last:mb-0", isDisabled && "opacity-50")}
               >
                 {/* Step header */}
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-2.5">
                   <div
                     className={cn(
-                      "mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full",
+                      "mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full",
                       config.bgColor,
                       config.color
                     )}
                   >
-                    <Icon className="h-3.5 w-3.5" />
+                    <Icon className="h-3 w-3" />
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
+                  <div className="flex-1 min-w-0 overflow-hidden">
+                    <div className="flex items-center gap-1.5">
                       <span className={cn(
-                        "text-sm font-medium",
+                        "text-xs font-medium truncate",
                         isActive ? "text-foreground" : "text-foreground/80"
                       )}>
                         {step.title}
@@ -163,18 +163,18 @@ export default function ThoughtLog({ thoughts, status }: ThoughtLogProps) {
                       )}
                     </div>
                     {step.content && (
-                      <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
+                      <p className="mt-0.5 text-[11px] text-muted-foreground leading-relaxed line-clamp-2">
                         {step.content}
                       </p>
                     )}
                     {/* Tool executions */}
                     {step.tool_executions.length > 0 && (
-                      <div className="mt-2 flex flex-wrap gap-1.5">
+                      <div className="mt-1.5 flex flex-wrap gap-1">
                         {step.tool_executions.map((exec, j) => (
                           <Badge
                             key={j}
                             variant="secondary"
-                            className="text-xs rounded-lg border-0"
+                            className="text-[10px] rounded-md border-0 px-1.5 py-0"
                           >
                             {exec.tool_name}
                             {exec.execution_time_ms && (
@@ -191,7 +191,7 @@ export default function ThoughtLog({ thoughts, status }: ThoughtLogProps) {
 
                 {/* Connector line */}
                 {i < thoughts.length - 1 && (
-                  <div className="ml-3.5 mt-1 mb-1 h-4 w-px bg-[#20242c]" />
+                  <div className="ml-3 mt-1 mb-1 h-3 w-px bg-[#20242c]" />
                 )}
               </motion.div>
             );

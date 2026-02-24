@@ -221,14 +221,14 @@ export default function HomePage() {
       </div>
 
       {/* Content area: 3-column grid */}
-      <div className="flex-1 overflow-hidden grid grid-cols-1 lg:grid-cols-[280px_1fr_340px] gap-0">
+      <div className="flex-1 min-h-0 overflow-hidden grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)_340px] gap-0">
         {/* Thought Log - left panel */}
-        <div className="overflow-hidden p-4 pt-0">
+        <div className="min-w-0 overflow-hidden p-4 pt-0">
           <ThoughtLog thoughts={displayThoughts} status={displayStatus} />
         </div>
 
         {/* Research Report - center panel */}
-        <div className="overflow-auto px-8 py-4">
+        <div className="min-w-0 overflow-auto px-8 py-4">
           <ResearchReport
             executiveSummary={research.executiveSummary}
             fullReport={research.fullReport}
@@ -237,7 +237,7 @@ export default function HomePage() {
         </div>
 
         {/* Agent Chat - right panel */}
-        <div className="overflow-hidden p-4 pt-0">
+        <div className="min-w-0 overflow-hidden p-4 pt-0">
           {isResearchComplete ? (
             <AgentChat />
           ) : (

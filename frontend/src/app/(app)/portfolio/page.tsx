@@ -72,7 +72,7 @@ export default function PortfolioPage() {
   return (
     <div className="flex flex-col h-full">
       {/* Action bar */}
-      <div className="px-6 py-4">
+      <div className="ml-130 px-6 py-4">
         <div className="mx-auto max-w-4xl flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#20242c]">
@@ -107,9 +107,9 @@ export default function PortfolioPage() {
       </div>
 
       {/* Content area: 2-column grid */}
-      <div className="flex-1 overflow-hidden grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-0">
+      <div className="flex-1 min-h-0 overflow-hidden grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)] gap-0">
         {/* Thought Log — left panel */}
-        <div className="overflow-hidden p-4 pt-0">
+        <div className="min-w-0 overflow-hidden p-4 pt-0">
           <ThoughtLog
             thoughts={portfolio.thoughts}
             status={portfolio.currentStatus}
@@ -117,7 +117,7 @@ export default function PortfolioPage() {
         </div>
 
         {/* Portfolio Report — right panel */}
-        <div className="overflow-auto px-8 py-4">
+        <div className="min-w-0 overflow-auto px-8 py-4">
           <PortfolioReport
             holdings={portfolio.portfolio?.holdings ?? []}
             metrics={portfolio.metrics}

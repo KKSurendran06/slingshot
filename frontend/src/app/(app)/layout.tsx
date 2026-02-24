@@ -16,9 +16,6 @@ const navItems = [
 function TrafficLights() {
   return (
     <div className="flex items-center gap-2">
-      <div className="h-3 w-3 rounded-full bg-[#ff5f57]" />
-      <div className="h-3 w-3 rounded-full bg-[#febc2e]" />
-      <div className="h-3 w-3 rounded-full bg-[#28c840]" />
     </div>
   );
 }
@@ -26,7 +23,7 @@ function TrafficLights() {
 function URLPill({ pathname }: { pathname: string }) {
   const route = pathname === "/" ? "/research" : pathname;
   return (
-    <div className="flex items-center justify-center rounded-lg bg-[#0f1115] px-6 py-2 shadow-inner">
+    <div className="ml-50 flex items-center justify-center rounded-lg bg-[#0f1115] px-6 py-2 shadow-inner">
       <span className="text-xs text-[#71717a] font-mono tracking-wide">
         slingshot.ai{route}
       </span>
@@ -79,7 +76,7 @@ export default function AppLayout({
         {/* Full viewport background */}
         <div className="min-h-screen flex items-start justify-center p-4 md:p-6">
           {/* macOS-style floating window */}
-          <div className="w-full max-w-[1400px] bg-[#151821] rounded-3xl shadow-2xl shadow-black/40 overflow-hidden flex flex-col" style={{ minHeight: 'calc(100vh - 48px)' }}>
+          <div className="w-full max-w-[1400px] bg-[#151821] rounded-3xl shadow-2xl shadow-black/40 overflow-hidden flex flex-col" style={{ height: 'calc(100vh - 48px)' }}>
             {/* Top header bar */}
             <div className="hidden md:flex items-center justify-between h-16 px-6 shrink-0">
               <TrafficLights />
@@ -88,7 +85,7 @@ export default function AppLayout({
             </div>
 
             {/* Main content */}
-            <main className="flex-1 overflow-auto">
+            <main className="flex-1 min-h-0 overflow-hidden">
               {children}
             </main>
           </div>

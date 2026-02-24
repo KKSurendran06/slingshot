@@ -1,9 +1,10 @@
 "use client";
 
-import { FileText, BookOpen } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import ReportContent from "@/components/shared/ReportContent";
+import { useMemo } from "react";
+import { motion } from "framer-motion";
+import { FileText, TrendingUp, BarChart3, Percent } from "lucide-react";
 import CollapsibleReport from "@/components/shared/CollapsibleReport";
+import InsightSummary from "@/components/shared/InsightSummary";
 import type { Citation } from "@/types";
 
 interface ResearchReportProps {
@@ -12,33 +13,103 @@ interface ResearchReportProps {
   citations: Citation[];
 }
 
-/**
- * Split the executive summary into bullet points.
- * Each sentence (delimited by `. ` or `.\n` or end-of-string after a period)
- * becomes a separate bullet, preserving [cite-N] markers.
- */
-function splitIntoBullets(text: string): string[] {
-  // Split on period followed by whitespace (but keep the period with the preceding text).
-  // We look for ". " or ".\n" boundaries while avoiding splitting on decimals like "19.2x".
-  // Simpler approach: split on `. ` that is followed by an uppercase letter or `[`.
-  const bullets: string[] = [];
-  const parts = text.split(/(?<=\.)\s+(?=[A-Z\[])/g);
-  for (const part of parts) {
-    const trimmed = part.trim();
-    if (trimmed) bullets.push(trimmed);
-  }
-  return bullets.length > 0 ? bullets : [text];
+// ---------------------------------------------------------------------------
+// Metric extraction — parse P/E, ROE, NIM from report text dynamically
+// ---------------------------------------------------------------------------
+
+interface ExtractedMetric {
+  label: string;
+  value: string;
+  color: string;
+  icon: typeof TrendingUp;
 }
 
 /**
- * Renders a research report with executive summary as bullet points
- * and detailed analysis + sources in a collapsible section.
+ * Attempts to extract P/E, ROE, and NIM values from the combined
+ * executive summary + full report text.  Returns only the metrics
+ * that were actually found — never hardcoded fallback values.
+ */
+function extractMetrics(
+  summary: string | null,
+  report: string | null
+): ExtractedMetric[] {
+  const combined = [summary ?? "", report ?? ""].join(" ");
+  if (!combined.trim()) return [];
+
+  const metrics: ExtractedMetric[] = [];
+
+  // P/E — matches patterns like "P/E of 19.2x", "P/E: 19.2x", "P/E 19.2x", "19.2x P/E"
+  const peMatch = combined.match(
+    /P\/E(?:\s+(?:of|ratio|at))?\s*[:=]?\s*(\d+\.?\d*x?)/i
+  ) ?? combined.match(/(\d+\.?\d*x)\s*P\/E/i);
+  if (peMatch) {
+    let val = peMatch[1];
+    if (!val.endsWith("x")) val += "x";
+    metrics.push({
+      label: "P/E Ratio",
+      value: val,
+      color: "text-[#30d158]",
+      icon: TrendingUp,
+    });
+  }
+
+  // ROE — matches "ROE: 16.5%", "ROE of 16.5%", etc.
+  const roeMatch = combined.match(
+    /ROE(?:\s+(?:of|at))?\s*[:=]?\s*(\d+\.?\d*%?)/i
+  );
+  if (roeMatch) {
+    let val = roeMatch[1];
+    if (!val.endsWith("%")) val += "%";
+    metrics.push({
+      label: "ROE",
+      value: val,
+      color: "text-[#0a84ff]",
+      icon: BarChart3,
+    });
+  }
+
+  // NIM — matches "NIM: 3.65%", "Net Interest Margin (NIM) stands at 3.65%", etc.
+  const nimMatch = combined.match(
+    /NIM(?:\))?(?:\s+(?:of|at|stands?\s+at))?\s*[:=]?\s*(\d+\.?\d*%?)/i
+  ) ?? combined.match(
+    /Net\s+Interest\s+Margin[^.]*?(\d+\.?\d*%)/i
+  );
+  if (nimMatch) {
+    let val = nimMatch[1];
+    if (!val.endsWith("%")) val += "%";
+    metrics.push({
+      label: "NIM",
+      value: val,
+      color: "text-[#ff9f0a]",
+      icon: Percent,
+    });
+  }
+
+  return metrics;
+}
+
+// ---------------------------------------------------------------------------
+// Component
+// ---------------------------------------------------------------------------
+
+/**
+ * Renders a research report with:
+ *  - Structured insight summary (via shared InsightSummary)
+ *  - Metric cards (P/E, ROE, NIM) extracted dynamically from report text
+ *  - Detailed analysis + sources in a collapsible section
  */
 export default function ResearchReport({
   executiveSummary,
   fullReport,
   citations,
 }: ResearchReportProps) {
+  // Extract metrics dynamically from text
+  const metrics = useMemo(
+    () => extractMetrics(executiveSummary, fullReport),
+    [executiveSummary, fullReport]
+  );
+
+  // ---- Empty state (no data yet) ----
   if (!executiveSummary && !fullReport) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center text-muted-foreground">
@@ -67,48 +138,58 @@ export default function ResearchReport({
         {/* Metric card skeletons */}
         <div className="mt-8 grid grid-cols-3 gap-6 w-full max-w-md">
           <div className="rounded-xl bg-[#1a1d23] p-4 text-center shadow-inner shadow-black/10">
-            <p className="text-xs text-muted-foreground mb-1">P/E</p>
-            <p className="text-lg font-bold text-[#3b82f6]">19.2x</p>
+            <div className="h-3 w-8 mx-auto rounded bg-[#20242c] mb-2 skeleton-bar" />
+            <div className="h-5 w-14 mx-auto rounded bg-[#20242c] skeleton-bar" style={{ animationDelay: '0.3s' }} />
           </div>
           <div className="rounded-xl bg-[#1a1d23] p-4 text-center shadow-inner shadow-black/10">
-            <p className="text-xs text-muted-foreground mb-1">ROE</p>
-            <p className="text-lg font-bold text-[#22c55e]">16.5%</p>
+            <div className="h-3 w-10 mx-auto rounded bg-[#20242c] mb-2 skeleton-bar" style={{ animationDelay: '0.1s' }} />
+            <div className="h-5 w-14 mx-auto rounded bg-[#20242c] skeleton-bar" style={{ animationDelay: '0.5s' }} />
           </div>
           <div className="rounded-xl bg-[#1a1d23] p-4 text-center shadow-inner shadow-black/10">
-            <p className="text-xs text-muted-foreground mb-1">NIM</p>
-            <p className="text-lg font-bold text-[#f59e0b]">3.65%</p>
+            <div className="h-3 w-8 mx-auto rounded bg-[#20242c] mb-2 skeleton-bar" style={{ animationDelay: '0.2s' }} />
+            <div className="h-5 w-14 mx-auto rounded bg-[#20242c] skeleton-bar" style={{ animationDelay: '0.7s' }} />
           </div>
         </div>
       </div>
     );
   }
 
-  const bullets = executiveSummary ? splitIntoBullets(executiveSummary) : [];
-
+  // ---- Populated state ----
   return (
     <div className="space-y-6">
-      {/* Executive Summary — always visible, rendered as bullet points */}
+      {/* Executive Summary — structured insight rows */}
       {executiveSummary && (
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="flex items-center gap-2 text-base">
-              <BookOpen className="h-4 w-4" />
-              Executive Summary
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ul className="space-y-2">
-              {bullets.map((bullet, i) => (
-                <li key={i} className="flex gap-2 text-sm leading-relaxed">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#3b82f6]" />
-                  <span className="prose prose-sm max-w-none dark:prose-invert">
-                    <ReportContent text={bullet} citations={citations} />
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </CardContent>
-        </Card>
+        <InsightSummary text={executiveSummary} citations={citations} />
+      )}
+
+      {/* Metric Cards — dynamic, only shown when metrics are found */}
+      {metrics.length > 0 && (
+        <div className="grid grid-cols-3 gap-6">
+          {metrics.map((metric, i) => {
+            const Icon = metric.icon;
+            return (
+              <motion.div
+                key={metric.label}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.08, duration: 0.3 }}
+                className="group rounded-xl bg-[#1a1d23] p-5 text-center shadow-sm shadow-black/10 transition-shadow duration-200 hover:shadow-md hover:shadow-black/20"
+              >
+                <div className="flex items-center justify-center gap-1.5 mb-2">
+                  <Icon className="h-3 w-3 text-muted-foreground" />
+                  <p className="text-[11px] font-medium tracking-wide text-muted-foreground uppercase">
+                    {metric.label}
+                  </p>
+                </div>
+                <p
+                  className={`text-2xl font-bold font-mono ${metric.color}`}
+                >
+                  {metric.value}
+                </p>
+              </motion.div>
+            );
+          })}
+        </div>
       )}
 
       {/* Detailed Analysis + Sources — collapsible */}

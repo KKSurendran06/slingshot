@@ -1,8 +1,6 @@
 "use client";
 
-import { BookOpen, Globe } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import ReportContent from "@/components/shared/ReportContent";
+import { Globe } from "lucide-react";
 import CollapsibleReport from "@/components/shared/CollapsibleReport";
 import CausalChain from "./CausalChain";
 import CompanyImpactGrid from "./CompanyImpactGrid";
@@ -64,22 +62,6 @@ export default function MacroReport({
       <CompanyImpactGrid companies={companies} />
       <TradeIdeasTable ideas={tradeIdeas} />
 
-      {/* Executive Summary — always visible */}
-      {executiveSummary && (
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="flex items-center gap-2 text-base">
-              <BookOpen className="h-4 w-4" />
-              Executive Summary
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-sm leading-relaxed text-muted-foreground">
-              <ReportContent text={executiveSummary} citations={citations} />
-            </div>
-          </CardContent>
-        </Card>
-      )}
 
       {/* Detailed Analysis + Sources — collapsible */}
       <CollapsibleReport

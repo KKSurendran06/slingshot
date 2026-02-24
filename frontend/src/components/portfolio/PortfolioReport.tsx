@@ -1,8 +1,6 @@
 "use client";
 
-import { Briefcase, BookOpen } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import ReportContent from "@/components/shared/ReportContent";
+import { Briefcase } from "lucide-react";
 import CollapsibleReport from "@/components/shared/CollapsibleReport";
 import PortfolioOverview from "./PortfolioOverview";
 import HoldingsTable from "./HoldingsTable";
@@ -81,23 +79,6 @@ export default function PortfolioReport({
 
       {/* Stress tests */}
       <StressTestResults tests={stressTests} />
-
-      {/* Executive Summary — always visible */}
-      {executiveSummary && (
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="flex items-center gap-2 text-base">
-              <BookOpen className="h-4 w-4" />
-              Executive Summary
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-sm leading-relaxed text-muted-foreground">
-              <ReportContent text={executiveSummary} citations={citations} />
-            </div>
-          </CardContent>
-        </Card>
-      )}
 
       {/* Detailed Analysis + Sources — collapsible */}
       <CollapsibleReport

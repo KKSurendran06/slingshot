@@ -78,9 +78,9 @@ export default function MacroPage() {
       </div>
 
       {/* Content area: 2-column grid */}
-      <div className="flex-1 overflow-hidden grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-0">
+      <div className="flex-1 min-h-0 overflow-hidden grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)] gap-0">
         {/* Thought Log — left panel */}
-        <div className="overflow-hidden p-4 pt-0">
+        <div className="min-w-0 overflow-hidden p-4 pt-0">
           <ThoughtLog
             thoughts={macro.thoughts}
             status={macro.currentStatus}
@@ -88,7 +88,7 @@ export default function MacroPage() {
         </div>
 
         {/* Macro Report — right panel */}
-        <div className="overflow-auto px-8 py-4">
+        <div className="min-w-0 overflow-auto px-8 py-4">
           <MacroReport
             causalChain={macro.causalChain}
             companies={macro.companies}
