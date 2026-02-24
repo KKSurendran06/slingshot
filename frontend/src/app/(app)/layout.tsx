@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Header from "@/components/layout/Header";
 import { Search, Globe, Briefcase } from "lucide-react";
 import { cn } from "@/lib/utils";
+import FloatingChat from "@/components/chat/FloatingChat";
 
 const navItems = [
   { label: "Research", href: "/research", icon: Search },
@@ -90,6 +91,7 @@ export default function AppLayout({
             </main>
           </div>
         </div>
+        <FloatingChat />
       </TooltipProvider>
     </div>
   );
