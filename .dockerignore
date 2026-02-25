@@ -1,0 +1,15 @@
+# Frontend build artifacts
+frontend/node_modules/
+frontend/.next/
+frontend/.env*
+
+# Backend — not included in this image
+backend/
+
+# Git / IDE / OS
+.git/
+.gitignore
+.vscode/
+.idea/
+*.swp
+.DS_Store
