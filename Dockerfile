@@ -7,12 +7,14 @@ COPY frontend/package.json frontend/package-lock.json ./
 
 # @next/swc-darwin-arm64 is a mac-only binary hardcoded as a regular dep.
 # Strip it before install so npm doesn't reject the linux environment,
-# then install the correct linux swc binary in its place.
+# then install the correct linux swc binary based on target architecture.
+ARG TARGETARCH
 RUN apk add --no-cache jq && \
     jq 'del(.dependencies["@next/swc-darwin-arm64"])' package.json > package.tmp.json && \
     mv package.tmp.json package.json && \
     npm install --legacy-peer-deps && \
-    npm install @next/swc-linux-arm64-musl --no-save --legacy-peer-deps
+    SWC_PKG=$(if [ "$TARGETARCH" = "amd64" ]; then echo "@next/swc-linux-x64-musl"; else echo "@next/swc-linux-arm64-musl"; fi) && \
+    npm install $SWC_PKG --no-save --legacy-peer-deps
 
 COPY frontend/ ./
 
