@@ -72,8 +72,8 @@ export default function PortfolioPage() {
   return (
     <div className="flex flex-col h-full">
       {/* Action bar */}
-      <div className="ml-130 px-6 py-4">
-        <div className="mx-auto max-w-4xl flex items-center justify-between">
+      <div className="px-6 py-4">
+        <div className="mx-auto max-w-5xl flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#20242c]">
               <Briefcase className="h-4 w-4 text-muted-foreground" />
@@ -106,8 +106,8 @@ export default function PortfolioPage() {
         </div>
       </div>
 
-      {/* Content area: 2-column grid */}
-      <div className="flex-1 min-h-0 overflow-hidden grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)] gap-0">
+      {/* Content area: 3-column grid (matching Research layout) */}
+      <div className="flex-1 min-h-0 overflow-hidden grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)_340px] gap-0">
         {/* Thought Log — left panel */}
         <div className="min-w-0 overflow-hidden p-4 pt-0">
           <ThoughtLog
@@ -116,7 +116,7 @@ export default function PortfolioPage() {
           />
         </div>
 
-        {/* Portfolio Report — right panel */}
+        {/* Portfolio Report — center panel */}
         <div className="min-w-0 overflow-auto px-8 py-4">
           <PortfolioReport
             holdings={portfolio.portfolio?.holdings ?? []}
@@ -128,6 +128,9 @@ export default function PortfolioPage() {
             citations={portfolio.citations}
           />
         </div>
+
+        {/* Right spacer panel */}
+        <div className="hidden lg:block" />
       </div>
     </div>
   );

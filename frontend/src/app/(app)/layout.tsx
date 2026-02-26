@@ -75,9 +75,9 @@ export default function AppLayout({
         </div>
 
         {/* Full viewport background */}
-        <div className="min-h-screen flex items-start justify-center p-4 md:p-6">
-          {/* macOS-style floating window */}
-          <div className="w-full max-w-[1400px] bg-[#151821] rounded-3xl shadow-2xl shadow-black/40 overflow-hidden flex flex-col" style={{ height: 'calc(100vh - 48px)' }}>
+        <div className="h-screen flex flex-col">
+          {/* Main window */}
+          <div className="w-full h-full bg-[#151821] overflow-hidden flex flex-col">
             {/* Top header bar */}
             <div className="hidden md:flex items-center justify-between h-16 px-6 shrink-0">
               <TrafficLights />

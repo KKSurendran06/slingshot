@@ -18,7 +18,7 @@ export default function HeroSection() {
         >
           <span className="rounded-full bg-[#1a1d23] px-4 py-1.5 text-xs font-medium tracking-wide text-muted-foreground shadow-lg">
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#30d158] mr-2" />
-            Launching Tomorrow
+            slingshot.ai
           </span>
         </motion.div>
 

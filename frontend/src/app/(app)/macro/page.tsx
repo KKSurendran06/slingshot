@@ -68,7 +68,7 @@ export default function MacroPage() {
     <div className="flex flex-col h-full">
       {/* Search bar */}
       <div className="px-6 py-4">
-        <div className="mx-auto max-w-4xl">
+        <div className="mx-auto max-w-5xl">
           <SearchBar
             onSearch={handleSearch}
             isLoading={macro.isLoading}
@@ -77,8 +77,8 @@ export default function MacroPage() {
         </div>
       </div>
 
-      {/* Content area: 2-column grid */}
-      <div className="flex-1 min-h-0 overflow-hidden grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)] gap-0">
+      {/* Content area: 3-column grid (matching Research layout) */}
+      <div className="flex-1 min-h-0 overflow-hidden grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)_340px] gap-0">
         {/* Thought Log — left panel */}
         <div className="min-w-0 overflow-hidden p-4 pt-0">
           <ThoughtLog
@@ -87,7 +87,7 @@ export default function MacroPage() {
           />
         </div>
 
-        {/* Macro Report — right panel */}
+        {/* Macro Report — center panel */}
         <div className="min-w-0 overflow-auto px-8 py-4">
           <MacroReport
             causalChain={macro.causalChain}
@@ -98,6 +98,9 @@ export default function MacroPage() {
             citations={macro.citations}
           />
         </div>
+
+        {/* Right spacer panel */}
+        <div className="hidden lg:block" />
       </div>
     </div>
   );
